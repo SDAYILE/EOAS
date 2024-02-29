@@ -1,0 +1,317 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:SimpleForm id="_SystemForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="System Details"/>
+			<Label required="true" text="Application Type"/>
+			<RadioButtonGroup enabled="{ViewModel>/isEditable}" id="idxAppType" select="onSelectAppType" selectedIndex="-1" columns="2">
+				<RadioButton text="New System" class="sapUiSmallMarginEnd"/>
+				<RadioButton text="Modification"/>
+			</RadioButtonGroup>
+		</f:content>
+	</f:SimpleForm>
+	<VBox class="sapUiLargeMarginBegin">
+		<Label text=""/>
+		<Table id="tblSystem" selectionChange="onSystemTypeSelect" mode="{= ${ViewModel>/isEditable} === true ? 'SingleSelectLeft' : 'None'}">
+			<items>
+				<ColumnListItem fieldGroupIds="001">
+					<cells>
+						<ObjectIdentifier title="Grid tied (generation source only, no batteries)"
+							text="An installation comprising a load consumption system and a generation system (typically a PV source)."/></cells>
+				</ColumnListItem>
+				<ColumnListItem fieldGroupIds="002">
+					<cells>
+						<ObjectIdentifier title="Grid tied hybrid (generation source with batteries)"
+							text="An installation comprising a load consumption system, a generation system (typically a PV source) and storage units."/></cells>
+				</ColumnListItem>
+				<ColumnListItem fieldGroupIds="003">
+					<cells>
+						<ObjectIdentifier title="Grid tied battery only"
+							text="An installation comprising a load consumption system and an energy storage and generation system (batteries only)."/>
+					</cells>
+				</ColumnListItem>
+				<ColumnListItem fieldGroupIds="004">
+					<cells>
+						<ObjectIdentifier title="Solar PV Geyser (Source only, no batteries)" text="Electrical water-heating geyser supplied by a PV energy source."/>
+					</cells>
+				</ColumnListItem>
+				<!--<ColumnListItem fieldGroupIds="005">-->
+				<!--	<cells>-->
+				<!--		<ObjectIdentifier title="Diesel / Petrol Generators (alternative supply)"-->
+				<!--			text="Alternative supplies in terms of SANS 10142-1, Section 7.12 which includes diesel/petrol generators. "/>-->
+				<!--	</cells>-->
+				<!--</ColumnListItem>-->
+			</items>
+			<columns>
+				<Column >
+					<header>
+						<Label required="true" text="Type of System"/>
+					</header>
+				</Column>
+			</columns>
+		</Table>
+	</VBox>
+	<f:SimpleForm id="_EnergyForm" editable="true" class="sapUiMediumMarginBottom" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+		labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+		columnsL="2" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label required="true" text="Energy source"/>
+			<ComboBox id="cmbEnergy" enabled="{ViewModel>/enableEnergy}" selectedKey="{Header>/EnergSourcType}" change="onSelectEnergyType"
+				items="{EnergyTypes>/data}">
+				<core:Item key="{EnergyTypes>Value}" text="{EnergyTypes>Discription}"/>
+			</ComboBox>
+			<Label text="Maximum Charging Current"/>
+			<Input id="inpMCC" value="{ path: 'ViewModel>/MCC', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 } }"
+				enabled="false" width="100%"/>
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm id="_ExportForm" editable="true" class="sapUiMediumMarginBottom" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+		labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" visible="{ViewModel>/isExporting}" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+		emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Export Details"/>
+			<Label required="{ViewModel>/isExporting}" text="Will the system be exporting to grid?"/>
+			<RadioButtonGroup enabled="{ViewModel>/isEditable}" id="idxExport" select="onSelectExport" selectedIndex="-1" columns="2">
+				<RadioButton text="Yes"/>
+				<RadioButton text="No"/>
+			</RadioButtonGroup>
+			<core:Title text=""/>
+			<Label text="Reverse flow blocking?"/>
+			<RadioButtonGroup enabled="{ViewModel>/isEditable}" visible="{ViewModel>/isNotExport}" id="idxReverse" select="onSelectReverse"
+				selectedIndex="-1" columns="2">
+				<RadioButton text="Yes"/>
+				<RadioButton text="No"/>
+			</RadioButtonGroup>
+			<!--<core:Title/>-->
+			<Label visible="{ViewModel>/isNotExport}" text="MEC (Maximum Export Capacity)"/>
+			<Input value="{ path: 'ViewModel>/MEC', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 } }"
+				visible="{ViewModel>/isNotExport}" id="inpMEC" enabled="false"/>
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm visible="false" id="SCResponsibleToPay" editable="true" layout="ColumnLayout">
+		<f:content>
+			<core:Title text="{i18n>persResonsibleTitle}"/>
+			<Label text="{i18n>selectParty}" required="true"/>
+			<ComboBox id="party" items="{PayersModel>/data}" change="onSelectPayer">
+				<core:Item key="{PayersModel>Name}{PayersModel>Surname}" text="{PayersModel>Name}{PayersModel>Surname}"/>
+			</ComboBox>
+			<Label text="{i18n>vat}" required="true"/>
+			<Input id="Vat" maxLength="20" change="onValidateVAT"/>
+			<Label text="{i18n>selectPostalAddress}" required="true"/>
+			<ComboBox id="postalAddress" items="{PostalModel>/data}" change="onSelectPostalAddress">
+				<core:Item key="{PostalModel>StreetNo}{PostalModel>StreetAdr}{PostalModel>City}"
+					text="{PostalModel>StreetNo} {PostalModel>StreetAdr} {PostalModel>City}"/>
+			</ComboBox>
+			<Label text="{i18n>requireVat}" required="true"/>
+			<RadioButtonGroup id="IstaxRequired" columns="2" selectedIndex="-1" width="100%" select="onSelectTaxRequired"
+				class="sapUiMediumMarginBottom">
+				<RadioButton id="RB1-1" text="Yes"/>
+				<RadioButton id="RB1-2" text="No"/>
+			</RadioButtonGroup>
+			<Label text="{i18n>vatCertificate}" required="true"/>
+			<!--<u:FileUploader id="FileUpload" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the local server" uploadComplete="handleUploadComplete"/>-->
+			<u:FileUploader fileSizeExceed="onFileSizeExceed" maximumFileSize="5" fieldGroupIds="VAT" id="FileUpload" xmlns:u="sap.ui.unified"
+				name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the server" uploadComplete="handleUploadComplete"
+				change="onUploadSchemaDoc" typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="pdf" placeholder="Choose a file for Upload..."></u:FileUploader>
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm visible="{ViewModel>/isBatteryReq}" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+		labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+		columnsL="2" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Battery Storage Details"/>
+			<MessageStrip text="Please list all batteries in this installation" type="Information" showIcon="true" class="sapUiMediumMarginBottom"/>
+			<!--<Label text="Battery Storage"/>-->
+			<!--<RadioButtonGroup enabled="false" id="idxBatStorage" selectedIndex="-1" columns="2">-->
+			<!--	<RadioButton text="Yes"/>-->
+			<!--	<RadioButton text="No"/>-->
+			<!--</RadioButtonGroup>-->
+		</f:content>
+	</f:SimpleForm>
+	<Table id="tblBateries" visible="{ViewModel>/isBatteryReq}" items="{BatteryModel>/data}"
+		noDataText="Click the &quot;Add a Battery&quot; Button to add a battery">
+		<columns>
+			<Column>
+				<header>
+					<Label text="Make"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="Model"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="Voltage"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="Size of Battery (kWh)"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="Quantity"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text=""/>
+				</header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<Text text="{BatteryModel>Manu}"/>
+					<Text text="{BatteryModel>Model}"/>
+					<Text text="{BatteryModel>Voltage}"/>
+					<Text text="{BatteryModel>SizeD}"/>
+					<Text text="{BatteryModel>Quant}"/>
+					<Button icon="sap-icon://delete" iconDensityAware="false" iconFirst="true" press="handleBatteryDelete" text="Delete" type="Transparent"
+						width="auto" enabled="{ViewModel>/isEditable}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+		<headerToolbar>
+			<Toolbar width="100%">
+				<content>
+					<Button id="btnAddBat" enabled="{ViewModel>/isEditable}" text="Add a Battery" press="onBatteryDialogOpen" width="auto" type="Emphasized"/>
+				</content>
+			</Toolbar>
+		</headerToolbar>
+	</Table>
+	<!--	<f:SimpleForm visible="{ViewModel>/isBatteryReq}" editable="true" layout="ResponsiveGridLayout">-->
+	<!--	<f:content>-->
+	<!--		<core:Title/>-->
+	<!--		<Label text="Total number of Batteries" design="Bold"/>-->
+	<!--		<Input id="inpTotInv" enabled="false" width="100%"/>-->
+	<!--		<core:Title/>-->
+	<!--		<Label text="Total capacity of embedded generation" design="Bold"/>-->
+	<!--		<Input id="inpCapInv" enabled="false" width="100%"/></f:content>-->
+	<!--	<Label design="Bold" text="NPR (Name Plate Rating)"/>-->
+	<!--	<Input value="{ path: 'ViewModel>/NPR', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 } }" id="inpNPR"-->
+	<!--		enabled="false"/>-->
+	<!--</f:SimpleForm>-->
+	<f:SimpleForm visible="{ViewModel>/isBatteryReq}" editable="true" layout="ResponsiveGridLayout">
+		<f:content>
+			<core:Title/>
+			<Label text="Total number of Batteries" design="Bold"/>
+			<Input id="inpTotBat" enabled="false" width="50%"/>
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm visible="{ViewModel>/isPV}" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="PV Panel Details"/>
+			<MessageStrip text="Please list all PV panels in this installation" type="Information" showIcon="true" class="sapUiMediumMarginBottom"/>
+		</f:content>
+	</f:SimpleForm>
+	<Table id="tblPV" items="{PVModel>/data}" visible="{ViewModel>/isPV}"
+		noDataText="Click the &quot; Add PV Panel&quot; Button to add a PV Panel">
+		<columns>
+			<Column>
+				<header>
+					<Label text="Manufacturer"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="Model"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="Watts Per Panel"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="Quantity"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text=""/>
+				</header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<Text text="{PVModel>Manu}"/>
+					<Text text="{PVModel>Model}"/>
+					<Text text="{PVModel>Voltage}"/>
+					<Text text="{PVModel>Quant}"/>
+					<Button icon="sap-icon://delete" iconDensityAware="false" iconFirst="true" press="handlePVDelete" text="Delete" type="Transparent"
+						width="auto" enabled="{ViewModel>/isEditable}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+		<headerToolbar>
+			<Toolbar width="100%">
+				<content>
+					<Button enabled="{ViewModel>/isEditable}" text="Add a PV Panel" press="onPVDialogOpen" width="auto" type="Emphasized"/>
+				</content>
+			</Toolbar>
+		</headerToolbar>
+	</Table>
+	<f:SimpleForm visible="{ViewModel>/isPV}" editable="true" layout="ResponsiveGridLayout">
+		<f:content>
+			<core:Title/>
+			<Label text="Total number of PV Panels" design="Bold"/>
+			<Input id="inpTotPV" enabled="false" width="100%"/>
+			<core:Title/>
+			<Label text="Total PV Watts" design="Bold"/>
+			<Input id="inpPVWatts" enabled="false" width="100%"/></f:content>
+	</f:SimpleForm>
+	<f:SimpleForm id="_ECSAForm" visible="{ViewModel>/isECSA}" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+		labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+		columnsL="2" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="ECSA Registered Professional Details"/>
+			<Label required="true" text="Registration number"/>
+			<SearchField id="ECSAReg" search="getECSAPSearch" width="100%" value="{ECSAModel>/EscaReg}" enabled="{ViewModel>/isEditable}"/>
+			<Label text="Registration category"/>
+			<Input enabled="false" value="{ECSAModel>/EscaCat}"/>
+			<Label text="Name and Surname"/>
+			<Input enabled="false" value="{ECSAModel>/Surname}"/>
+			<core:Title/>
+			<Label text="Company Name"/>
+			<Input enabled="false" value="{ECSAModel>/Name}"/>
+			<Label text="Contact number"/>
+			<Input enabled="false" value="{ECSAModel>/Wtelep}"/>
+			<Label text="Email Address"/>
+			<Input enabled="false" value="{ECSAModel>/Email}"/>
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm id="_ConstForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Construction Details"/>
+			<Label required="true" text="Is the System already installed?"/>
+			<RadioButtonGroup enabled="{ViewModel>/isEditable}" id="idxInstalled" select="onSelectInstalled" selectedIndex="-1" columns="2">
+				<RadioButton text="Yes"/>
+				<RadioButton text="No"/>
+			</RadioButtonGroup>
+			<Label text=""/>
+			<MessageStrip visible="{ViewModel>/isInstalled}"
+				text="Please note, the current installation cannot be connected to the grid until commissioning approval has been granted. "
+				type="Information" showIcon="true" class="sapUiMediumMarginBottom"/>
+			<core:Title/>
+			<Label required="{ViewModel>/isNotInstalled}" visible="{ViewModel>/isNotInstalled}" text="Anticipated construction start date"/>
+			<DatePicker visible="{ViewModel>/isNotInstalled}" change="onValidateStartDate"
+				value="{ path: 'Header>/StartDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyy'} }"
+				enabled="{ViewModel>/isEditable}" id="startDate"/>
+			<Label required="{ViewModel>/isNotInstalled}" visible="{ViewModel>/isNotInstalled}" text="Anticipated construction end date"/>
+			<DatePicker visible="{ViewModel>/isNotInstalled}" change="onValidateEndDate"
+				value="{ path: 'Header>/EndDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyy' } }"
+				enabled="{ViewModel>/isEditable}" id="endDate"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

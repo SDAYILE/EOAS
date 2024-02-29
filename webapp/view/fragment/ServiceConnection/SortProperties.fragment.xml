@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="ERF Number" key="Erf" selected="true"/>
+			<ViewSettingsItem text="Property Address" key="PropAddr" selected="true"/>
+			<!--<ViewSettingsItem text="Street No" key="StreetNo"/>-->
+			<!--<ViewSettingsItem text="Street Address" key="StreetAdr"/>-->
+			<!--<ViewSettingsItem text="Suburb" key="Suburb"/>-->
+			<ViewSettingsItem text="City" key="City"/>
+			<!--<ViewSettingsItem text="Postal Code" key="PostalCode"/>-->
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,22 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="capetown.gov.zaEnergyApplication.controller.SuccessMessagePage" xmlns:html="http://www.w3.org/1999/xhtml">
+	<MessagePage showHeader="false"
+				 text="Application Completed: Notification No: 12345."
+				 enableFormattedText="true"
+				 description="&lt;strong&gt;What happens next:&lt;ul&gt;&lt;li&gt;Your current security settings prohibit running third party controls on this page.&lt;/li&gt;&lt;li&gt;You have blocked a publisher of one of the controls."
+				 icon="sap-icon://accept">
+	    
+		<!--<Buttons>-->
+		<!--	<Button text="Change security settings"/>-->
+		<!--	<Button text="Reload page"/>-->
+		<!--</Buttons>-->
+		
+		<!--<FlexBox alignContent="Center" alignItems="Center"> -->
+		<!--    <items>-->
+		<!--        <Button text="Return to Main Menu" />-->
+		<!--    </items>-->
+		<!--</FlexBox>-->
+
+		
+	</MessagePage>
+</mvc:View>

@@ -1,0 +1,74 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified">
+	<!--   	<f:SimpleForm id="SCToBeContacted" editable="true">-->
+	<!--	<f:content>-->
+	<!--		<Label text="Person to be contacted"/>-->
+	<!--		<ComboBox id="selectPerson" width="50%" change="onSelectPerson">-->
+	<!--			<core:Item key="Owner" text="Owner"/>-->
+	<!--			<core:Item key="Contact" text="Contact Person"/>-->
+	<!--		</ComboBox>-->
+	<!--	</f:content>-->
+	<!--</f:SimpleForm>-->
+	<MessageStrip xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m"
+		text="{i18n>mandatoryText}" showIcon="true" />
+		
+	<f:SimpleForm id="SCOwnerContacts" editable="true" layout="ColumnLayout" title="{i18n>propertyOwnerContactTitle}">
+		<f:content>
+			<Label text="{i18n>title}"/>
+			<Input id="ownerTitle" enabled="false" value="{Title}"/>
+			<Label text="{i18n>surname}"/>
+			<Input id="OwnerSurname" enabled="false" value="{LastName}" liveChange="onResetError"/>
+			<Label text="{i18n>email}" required="true"/>
+			<Input id="ownerEmail" value="{Email}" maxLength="241" change="onValidateEmail" liveChange="onResetError"/>
+			<Label text="{i18n>firstName}"/>
+			<Input id="ownerName" enabled="false" value="{FirstName}" liveChange="onResetError"/>
+			<Label text="{i18n>mobile}" required="true"/>
+			<Input id="ownerCell" value="{CellNo}" maxLength="30" change="onValidatePhoneNumber" liveChange="onResetError"/>
+			<Label text="{i18n>work}"/>
+			<Input id="ownerWorkTel" value="{WorkTel}" maxLength="30" change="onValidatePhoneNumber" liveChange="onResetError"/>
+		</f:content>
+	</f:SimpleForm>
+	
+	<f:SimpleForm id="SCContactPerson" editable="true" layout="ColumnLayout" title="Contact Person Details">
+		<f:content>
+			<Label text="{i18n>title}" required="true"/>
+			<ComboBox id="title" selectedKey="{ContactTitle}" items="{ZUI5_EOAS>/TitlesSet}" change="onSelectDropDown">
+				<core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}"/>
+			</ComboBox>
+			<Label text="{i18n>surname}" required="true"/>
+			<Input id="surname" value="{ContactSurname}" maxLength="40" liveChange="removeNumbersAndResetError"/>
+			<Label text="{i18n>email}" required="true"/>
+			<Input id="email" value="{ContactEmail}" maxLength="241" change="onValidateEmail" liveChange="onResetError"/>
+			<Label text="{i18n>firstName}" required="true"/>
+			<Input id="name" value="{ContactName}" maxLength="40" liveChange="removeNumbersAndResetError"/>
+			<Label text="{i18n>mobile}" required="true"/>
+			<Input id="cell" value="{ContactCellNo}" maxLength="30" change="onValidatePhoneNumber" liveChange="onResetError"/>
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm id="SCResponsibleToPay" editable="true" layout="ColumnLayout" title="{i18n>persResonsibleTitle}">
+		<f:content>
+			<Label text="{i18n>selectParty}" required="true"/>
+			<ComboBox id="party" items="{MultiOwnersModel>/results}" change="onSelectContact">
+				<core:Item key="{MultiOwnersModel>Key}" text="{MultiOwnersModel>Value}"/>
+			</ComboBox>
+			<Label text="{i18n>vat}" required="true"/>
+			<Input id="Vat" value="{VatNo}" maxLength="20" change="onValidateVAT"/>
+			<Label text="{i18n>selectPostalAddress}" required="true"/>
+			<ComboBox id="postalAddress" items="{PayerAddressModel>/results}" change="onSelectPostalAddress">
+				<core:Item key="{PayerAddressModel>Key}" text="{PayerAddressModel>Value}"/>
+			</ComboBox>
+			<Label text="{i18n>requireVat}" required="true"/>
+			<RadioButtonGroup id="IstaxRequired" columns="2" selectedIndex="-1" width="100%" select="onSelectTaxRequired"
+				class="sapUiMediumMarginBottom">
+				<RadioButton id="RB1-1" text="Yes"/>
+				<RadioButton id="RB1-2" text="No"/>
+			</RadioButtonGroup>
+			<Label text="{i18n>vatCertificate}" required="true"/>
+			<!--<u:FileUploader id="FileUpload" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the local server" uploadComplete="handleUploadComplete"/>-->
+			<u:FileUploader fileSizeExceed="onFileSizeExceed" maximumFileSize="5" fieldGroupIds="FileUpload" id="FileUpload" xmlns:u="sap.ui.unified"
+				name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the server" uploadComplete="handleUploadComplete"
+				change="onUploadDocuments" typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="pdf"
+				placeholder="Choose a file for Upload..."></u:FileUploader>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

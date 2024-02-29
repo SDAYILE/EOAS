@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<MessageStrip xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m"
+		text="Please note that all fields marked with * are mandatory for completion" showIcon="true"/>
+	<f:SimpleForm id="_ProxyDetailsForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title/>
+			<Label required="true" text="{i18n>proxIDType}"/>
+			<RadioButtonGroup id="rbgIDType" selectedIndex="{= ${Header>/ProxIdTyp} === '000004' ? 1 : 0 }" select="onIDType" columns="2" width="100%"
+				enabled="{ViewModel>/isEditable}">
+				<RadioButton text="{i18n>proxSAID}"/>
+				<RadioButton text="{i18n>proxPassport}"/>
+			</RadioButtonGroup>
+			<Label id="lblID" required="true" text="{i18n>proxID}"/>
+			<Input change="Validate" id="oIdInput" enabled="{ViewModel>/isEditable}" value="{Header>/ProxId}"/>
+			<Label required="true" text="{i18n>proxName}"/>
+			<Input liveChange="_validatePoxyDetails" enabled="{ViewModel>/isEditable}" value="{Header>/BuMcname2}"/>
+			<Label required="true" text="{i18n>proxSurname}"/>
+			<Input liveChange="_validatePoxyDetails" enabled="{ViewModel>/isEditable}" value="{Header>/BuMcname1}"/>
+			<Label required="true" text="{i18n>proxNumber}"/>
+			<Input enabled="{ViewModel>/isEditable}" change="_onValidatePhoneNumber" value="{Header>/BuMobile}"/>
+			<Label required="true" text="{i18n>proxEmail}"/>
+			<Input change="_onValidateEmail" enabled="{ViewModel>/isEditable}" value="{Header>/BuEmail}"/>
+			<core:Title/>
+			<MessageStrip
+				text="{i18n>proxPeriodMsg}"
+				type="Information" showIcon="true" class="sapUiMediumMarginBottom"></MessageStrip>
+			<Label required="true" text="{i18n>proxFrom}"/>
+			<DatePicker id="startDate" placeholder="Select date" change="onValidateStartDate" enabled="{ViewModel>/isEditable}"
+				value="{ path: 'Header>/ProxStart', type: 'sap.ui.model.type.Date', formatOptions: {'pattern': 'dd.MM.yyyy'} }"/>
+			<Label required="true" text="{i18n>proxTo}"/>
+			<DatePicker change="onValidateEndDate" placeholder="Select date" enabled="{ViewModel>/isEditable}"
+				value="{ path: 'Header>/ProxEnd', type: 'sap.ui.model.type.Date', formatOptions: { 'pattern': 'dd.MM.yyyy' } }"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

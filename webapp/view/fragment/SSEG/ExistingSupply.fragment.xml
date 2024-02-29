@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:SimpleForm id="_SupplyForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Existing Supply Details"/>
+			<Label required="true" text="Select the meter related to the application"/>
+			<Input id="cmbMeters" liveChange="_validateExistingSupply" enabled="{ViewModel>/isEditable}" textFormatMode="KeyValue" placeholder="Select Meter number"
+				value="{Header>/MeterNo}" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"/>
+			<Label text="Meter type"/>
+			<Input value="{ViewModel>/DeviceCategoryText}" enabled="false"/>
+			
+			<!--<Input value="{ViewModel>/Phase}" enabled="false"/>-->
+			<core:Title/>
+			<!--<Label text="Category"/>-->
+			<!--<Input value="{ViewModel>/ExistSuppCategory}" enabled="false"/>-->
+			<Label required="true" text="Existing Supply Phase"/>
+			<ComboBox id="phaseCMB" selectedKey="{ViewModel>/Phase}" change="onSelectSupplyPhase" enabled="false" items="{PhaseTypes>/data}">
+				<core:Item key="{PhaseTypes>Value}" text="{PhaseTypes>Discription}"/>
+			</ComboBox>
+			<Label required="true" text="Existing supply size"/>
+			<ComboBox id="cmbSupplySize" enabled="{ViewModel>/isEditable}" selectedKey="{Header>/AMPERE_R}" items="{SupplySize>/data}" change="onAmpSelect">
+				<core:Item key="{SupplySize>Value}" text="{SupplySize>Discription}"/>
+			</ComboBox>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

@@ -1,0 +1,8 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic"
+	xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:form="sap.ui.layout.form">
+	<Text class="sapUiSmallMarginBottom" text="{i18n>SCDelaration}"/>
+	<VBox>
+	</VBox>
+	<Text/>
+	<CheckBox id="chkConfirm" text="{i18n>confirm}" valueState="Information" select="onConfirm"/>
+</core:FragmentDefinition>

@@ -1,0 +1,9 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<BusyDialog
+		title="Proxy ID Verification"
+		text="Verifying if there is a valid BP number assigned to the Proxy ID Number"
+		showCancelButton="true"
+		close="onDialogClosed" />
+</core:FragmentDefinition>

@@ -1,0 +1,87 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="capetown.gov.zaEnergyApplication.controller.Authorizations" xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true">
+	<App>
+		<pages>
+			<Page showHeader="true" navButtonPress="onNavBack" showNavButton="true">
+				<headerContent>
+					<Button icon="sap-icon://information" text="More Info" press="onMoreInfo"/>
+				</headerContent>
+				<content>
+					<Label text="{i18n>ProxytitleProx}" class="pageTitle"/>
+					<Image src="./png/coct.png" width="200px" visible="true" densityAware="true" class="sapUiResponsiveMargin"/>
+					<Toolbar width="100%" height="2px" class="orangeLine"/>
+					<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true"
+						layout="ResponsiveGridLayout" title="{i18n>proxTitle}">
+						<sap.ui.layout.form:content>
+							<Text text="{i18n>proxInstruction}"/></sap.ui.layout.form:content>
+					</sap.ui.layout.form:SimpleForm>
+					<Table id="tblHistory" fixedLayout="false" growing="true" growingThreshold="6"
+						items="{ path: 'HeaderModel>/',sorter : {path : 'AppReqid', descending: true}}" class="sapUiTinyMarginBegin sapUiTinyMarginEnd">
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Link emphasized="true" press="onDisplayApplication" text="{HeaderModel>AppReqid}"/>
+									<Text text="{HeaderModel>BuMcname2} {HeaderModel&gt;BuMcname1}"/>
+									<Text text="{HeaderModel>Reqname}"/>
+									<Text
+										text="{path: 'HeaderModel>ProxStart', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyy' } } - { path: 'HeaderModel>ProxEnd', type: 'sap.ui.model.type.Date', formatOptions: { 'pattern': 'dd.MM.yyy'} }"/>
+									<FlexBox alignItems="Center" justifyContent="Start">
+										<ObjectStatus class="sapUiSmallMarginEnd"
+											text="{= ${HeaderModel>ReqStatus} === 'I' ? 'In Progress' : ${HeaderModel>ReqStatus} === 'A' ? 'Approved' : 'Rejected' }"
+											state="{= ${HeaderModel>ReqStatus} === 'I' ? 'Information' : ${HeaderModel>ReqStatus} === 'A' ? 'Success' : 'Error' }"
+											icon="{= ${HeaderModel>ReqStatus} === 'I' ? 'sap-icon://process' : ${HeaderModel>ReqStatus} === 'A' ? 'sap-icon://sys-enter-2' : 'sap-icon://error' }"/>
+										<Button icon="sap-icon://message-information" fieldGroupIds="{HeaderModel>ReqStatus}" press=".handlePopoverPress" width="auto"
+											type="Transparent"/>
+									</FlexBox>
+								</cells>
+							</ColumnListItem>
+						</items>
+						<columns>
+							<Column>
+								<header>
+									<Text text="{i18n>proxAppID}"/>
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="{i18n>proxName}"/>
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="{i18n>proxAddr}"/>
+								</header>
+							</Column>
+							<Column>
+								<header>
+									<Text text="{i18n>proxPeriod}"/>
+								</header>
+							</Column>
+							<Column width="20%">
+								<header>
+									<Text text="{i18n>proxStatus}"/>
+								</header>
+							</Column>
+						</columns>
+						<headerToolbar>
+							<Toolbar width="100%">
+								<content>
+									<ToolbarSpacer width="95%"/>
+									<Button tooltip="Sort" icon="sap-icon://sort" class="blueButton" type="Emphasized" press="handleSortButtonPressed"/>
+								</content>
+							</Toolbar>
+						</headerToolbar>
+					</Table>
+				</content>
+				<footer>
+					<Toolbar width="100%">
+						<content>
+							<!--<ToolbarSpacer/>-->
+							<Button press="onNewAppPress" text="{i18n>proxNew}" width="auto" class="blueButton" type="Emphasized"/>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

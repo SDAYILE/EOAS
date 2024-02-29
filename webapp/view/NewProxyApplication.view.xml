@@ -1,0 +1,35 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="capetown.gov.zaEnergyApplication.controller.NewProxyApplication" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page id="editPage" title="{i18n>proxAppTitle}" showNavButton="true" navButtonPress="onNavBack">
+				<headerContent>
+					<Button icon="sap-icon://information" text="More Info" press="onMoreInfo"/>
+				</headerContent>
+				<content>
+					<Wizard id="ProxyWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
+						<WizardStep id="PropertyStep" complete="onSaveAppProgress" title="{i18n>proxPropStep}" validated="false">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.Proxy.SelectProperty" type="XML"/>
+						</WizardStep>
+						<WizardStep id="ProxyDetailStep" complete="onSaveAppProgress" validated="false" title="{i18n>proxDetStep}">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.Proxy.ProxyDetails" type="XML"/>
+						</WizardStep>
+						<WizardStep id="DocumentStep" complete="onSaveAppProgress" validated="false" title="{i18n>proxDoxStep}">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.Proxy.Documents" type="XML"/>
+						</WizardStep>
+					</Wizard>
+				</content>
+				<footer>
+					<Toolbar width="100%">
+						<content>
+							<ToolbarSpacer/>
+							<Button text="{i18n>Cancel}" width="100px" type="Reject" press="onNavBack"/>
+							<Button text="{i18n>Submit}" enabled="{ViewModel>/enableSubmit}" visible="{ViewModel>/isEditable}" press="onSubmitApp" width="100px"
+								type="Accept"/>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

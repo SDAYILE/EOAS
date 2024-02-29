@@ -1,0 +1,10 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Popover  id="myStatusPopover" placement="Left">
+		<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" layout="ResponsiveGridLayout">
+		    <sap.ui.layout.form:content>
+		        <core:Title text="{ViewModel>/MessageTitle}"/>
+		        <Text xmlns:core="sap.ui.core" xmlns="sap.m" text="{ViewModel>/Message}"/></sap.ui.layout.form:content>
+		</sap.ui.layout.form:SimpleForm>
+	<content/>
+	</Popover>
+</core:FragmentDefinition>

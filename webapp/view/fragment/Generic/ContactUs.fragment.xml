@@ -1,0 +1,34 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.layout.form="sap.ui.layout.form">
+	<ResponsivePopover class="sapUiPopupWithPadding" placement="Bottom" title="For any support-related queries on Online Energy Services">
+		<content>
+			<!--<VBox class="sapUiSmallMargin">-->
+				<!--<f:SimpleForm id="EOASCityContactForm"-->
+				<!--	minWidth="1024"-->
+				<!--	maxContainerCols="2"-->
+				<!--	editable="true"-->
+				<!--	layout="ResponsiveGridLayout"-->
+				<!--	labelSpanL="3"-->
+				<!--	labelSpanM="3"-->
+				<!--	emptySpanL="4"-->
+				<!--	emptySpanM="4"-->
+				<!--	columnsL="1"-->
+				<!--	columnsM="1"-->
+				<!--	class="editableForm">-->
+				<!--        <Label text="Telephone" />-->
+				<!--		<Text text="021 901 1000 " />-->
+				<!--		<Label text="Email" />-->
+				<!--		<Text text="energyservices@capetown.gov.za" />-->
+				<!--</f:SimpleForm>-->
+				
+				<sap.ui.layout.form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+						<sap.ui.layout.form:content>
+							<FormattedText htmlText="{ContactUsModel>/HTML}"/>
+						</sap.ui.layout.form:content>
+					</sap.ui.layout.form:SimpleForm>
+			<!--</VBox>-->
+		</content>
+		<endButton>
+			<Button icon="sap-icon://ok" press="onOkCityContact" text="Okay" type="Accept"/>
+		</endButton>
+	</ResponsivePopover>
+</core:FragmentDefinition>

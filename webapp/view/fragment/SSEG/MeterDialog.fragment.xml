@@ -1,0 +1,46 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<TableSelectDialog id="myDialogMeter" contentWidth="30%" contentHeight="auto"  noDataText="No Details Found" title="Select Meter Details" search=".handleSearch" confirm=".handleClose"
+		cancel=".handleClose" items="{Meters>/data}">
+		<ColumnListItem vAlign="Middle">
+			<cells>
+				<Text text="{Meters>MeterNo}"/>
+				<!--<Text text="{Meters>Equipment}"/>-->
+				<!--<Text text="{Meters>Material}"/>-->
+				<!--<ObjectIdentifier title="{Meters>ExistDeviceCategory}" text="{Meters>DeviceCategoryText}"/>-->
+    <!--            <ObjectIdentifier title="{Meters>ExistSuppPhase}" text="{Meters>ExistSuppPhaseText}"/>-->
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column>
+				<header>
+					<Text text="Meter No"/>
+				</header>
+			</Column>
+			<!--<Column>-->
+			<!--	<header>-->
+			<!--		<Text text="Equipment"/>-->
+			<!--	</header>-->
+			<!--</Column>-->
+			<!--<Column>-->
+			<!--	<header>-->
+			<!--		<Text text="Material"/>-->
+			<!--	</header>-->
+			<!--</Column>-->
+			<!--<Column>-->
+			<!--	<header>-->
+			<!--		<Text text="Device Category"/>-->
+			<!--	</header>-->
+			<!--</Column>-->
+			<!--<Column >-->
+			<!--	<header>-->
+			<!--		<Text text="Supply Phase"/>-->
+			<!--	</header>-->
+			<!--</Column>-->
+			<!--<Column >-->
+			<!--	<header>-->
+			<!--		<Text text="Category"/>-->
+			<!--	</header>-->
+			<!--</Column>-->
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

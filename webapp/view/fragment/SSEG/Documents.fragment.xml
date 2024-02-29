@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns:upload="sap.m.upload" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<MessageStrip text="The following file types are supported : docx,doc, jpg, pdf, gif, jpeg, bmp. Maximum file size is 5MB" showIcon="true"
+		showCloseButton="false" class="sapUiMediumMarginBottom"/>
+</core:FragmentDefinition>

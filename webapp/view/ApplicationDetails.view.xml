@@ -1,0 +1,141 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form"
+	controllerName="capetown.gov.zaEnergyApplication.controller.ApplicationDetails">
+	<App>
+		<pages>
+			<Page id="applicationPage" showNavButton="true" navButtonPress="onNavBack" title="">
+				<content>
+					<form:SimpleForm id="PrevPropertyForm" title="Property Details" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+						<form:content>
+							<Label text="ERF Number"/>
+							<Text text="{ErfNo}"/>
+							<Label text="Property Address"/>
+							<Text text="{StreetNo} {StreetAdr} {Suburb}"/>
+							<Label text="City"/>
+							<Text text="{City}"/>
+							<Label text="Postal Code"/>
+							<Text text="{PostalCode}"/>
+						</form:content>
+					</form:SimpleForm>
+					<form:SimpleForm id="PrevPropertyOwnerForm" title="Property Owner" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+						<form:content>
+							<Label text="Title"/>
+							<Text text="{OwnerTitle}"/>
+							<Label text="Name"/>
+							<Text text="{OwnerName}"/>
+							<Label text="Surname"/>
+							<Text text="{OwnerSurname}"/>
+							<Label text="Cell No"/>
+							<Text text="{OwnerCellNo}"/>
+							<!--<Label text="Work Tel"/>-->
+							<!--<Text text="{/productDescription}"/>-->
+							<Label text="Email"/>
+							<Text text="{OwnerEmail}"/>
+						</form:content>
+					</form:SimpleForm>
+					<form:SimpleForm id="PrevContactPersonForm" title="Contact Person" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+						<form:content>
+							<Label text="Title"/>
+							<Text text="{ContactTitle}"/>
+							<Label text="Name"/>
+							<Text text="{ContactName}"/>
+							<Label text="Surname"/>
+							<Text text="{ContactSurname}"/>
+							<Label text="Cell No"/>
+							<Text text="{ContactCellNo}"/>
+							<!--<Label text="Work Tel"/>-->
+							<!--<Text text="{/productDescription}"/>-->
+							<Label text="Email"/>
+							<Text text="{ContactEmail}"/>
+						</form:content>
+					</form:SimpleForm>
+					<form:SimpleForm id="PrevPersonPaymentForm" title="Person/Entity Responsible for Payment" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+						<form:content>
+							<Label text="Party"/>
+							<Text text="{/productPrice}"/>
+							<Label text="Do you require VAT invoice?"/>
+							<Text text="{/discountGroup}"/>
+							<Label text="VAT number"/>
+							<Text text="{PayerVatNo}"/>
+							<Label text="VAT certificate"/>
+							<Text text="{/productVAT}"/>
+							<Label text="Address to appear on the invoice"/>
+							<Text text="{PayerHouseNum} {PayerStreet} {PayerCity} {PayerPostalCode}"/>
+						</form:content>
+					</form:SimpleForm>
+					<form:SimpleForm id="PrevServiceSelectiontForm" title="Service Selected" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+						<form:content>
+							<Label text="Service applied for"/>
+							<Text id="PrevService"/>
+							<Label text="Is this a subdivision of a property"/>
+							<Text text="{/discountGroup}" visible="false"/>
+						</form:content>
+					</form:SimpleForm>
+					<form:SimpleForm id="PrevExistingSupplyForm" title="Existing Supply" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+						<form:content>
+							<Label text="Meter Number"/>
+							<Text text="{MeterNo}"/>
+							<Label text="Device Category"/>
+							<Text text="{ExistDeviceCategory}"/>
+							<Label text="Existing Supply Phase"/>
+							<Text text="{ExistSuppCategory}"/>
+							<Label text="Existing Required Supply"/>
+							<Text text="{ExistSuppPhase}"/>
+							<Label text="Existing Required Supply Size"/>
+							<Text text="{ExistSuppSupply}"/>
+							<Label text="Existing Voltage"/>
+							<Text text="{ExistSuppVoltage}"/>
+							<Label text="Existing Supply Unit"/>
+							<Text text="{ExistSuppUnit}"/>
+						</form:content>
+					</form:SimpleForm>
+					<form:SimpleForm id="PrevServiceRequiredForm" title="Service Required" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+						<form:content>
+							<Label text="Category"/>
+							<Text id="PrevCategory" text="{Category}"/>
+							<Label text="Supply Unit"/>
+							<Text id="PrevSupplyUnit" text="{/discountGroup}"/>
+							<Label text="Prepayment Meter Quantity Required"/>
+							<Text id="PrevPrepaymentMeter" text="{NoOfMeters}"/>
+							<Label text="Upgrade Supply"/>
+							<Text id="PrevUpgradeSupply" text="{Upgrade}"/>
+							<Label text="Building Plans"/>
+							<Text id="PrevBuildingPlan" text="{/discountGroup}"/>
+							<Label text="Voltage"/>
+							<Text id="PrevVoltage" text="{Voltage}"/>
+							<Label text="Required Supply Phase"/>
+							<Text id="PrevSupplyPhase" text="{Phase}"/>
+							<Label text="Required Supply Size"/>
+							<Text id="PrevSupplyPhaseSize" text="{Supply}"/>
+							<Label text="Meter Type"/>
+							<Text id="PrevMeterType" text="{MeterType}"/>
+							<Label text="Cable Required"/>
+							<Text id="PrevCable" text="{CableReq}"/>
+							<Label text="Required LV Supply Size"/>
+							<Text id="PrevLVSupplySize" text="{/productPrice}" visible="false"/>
+							<Label text="Required LV Supply Size (A)"/>
+							<Text  id="PrevLVSupplySizeA" text="{/productPrice}" visible="false"/>
+							<Label text="Required MV Supply Size in kVA"/>
+							<Text id="PrevLVSupplySizeKVA" text="{/productPrice}" visible="false"/>
+							<Label text="Required HV Supply Size in MVA"/>
+							<Text id="PrevLVSupplySizeMVA" text="{/productPrice}" visible="false"/>
+							<Label text="Details of Relocation picture"/>
+							<Text id="PrevRelocation1" text="{/discountGroup}"/>
+							<Label text="Details of Relocation picture"/>
+							<Text id="PrevRelocation2" text="{/productVAT}"/>
+							<Label text="Details of Relocation picture"/>
+							<Text id="PrevRelocation3" text="{/discountGroup}"/>
+							<Label text="Details of Relocation picture"/>
+							<Text id="PrevRelocation4" text="{/productVAT}"/>
+							<Label text="Details of Relocation picture"/>
+							<Text id="PrevRelocation5" text="{/productVAT}"/>
+							<Label text="Briefly describe details of Relocation"/>
+							<TextArea id="PrevRelocation6" rows="8" cols="50" maxLength="300" enabled="false"/>
+							<Label text="Tariff Choice"/>
+							<Text id="PrevTariff" text="{TariffChoice}"/>
+						</form:content>
+					</form:SimpleForm>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

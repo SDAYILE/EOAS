@@ -1,0 +1,26 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form">
+	<f:SimpleForm id="SCServiceSelectionForm" editable="true" title="">
+		<f:content>
+			<Label text="{i18n>chooseService}" required="true"/>
+			<ComboBox
+			    id="serviceSelectionType"
+				items="{ZUI5_EOAS>/ServiceConnectionTypeSet}" selectedKey="{ServiceType}" width="50%" change="onServiceTypeSelection">
+				<core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />
+			</ComboBox>
+		</f:content>
+	</f:SimpleForm>
+		<f:SimpleForm id="SCSubdivisionForm" editable="true" title="">
+		<f:content>
+			<Label text="{i18n>subdivisionQuestion}" required="true"/>
+			<!--<ComboBox id="subdivision" selectedKey="{Subdivision}" visible="false" width="50%" change="onSelectSubdivision">-->
+			<!--	<core:Item key="X" text="Yes"/>-->
+			<!--	<core:Item key="" text="No"/>-->
+			<!--</ComboBox>-->
+			<RadioButtonGroup id="subdivision" columns="2" selectedIndex="-1" visible="false" width="100%" select="onSelectSubdivision"
+				class="sapUiMediumMarginBottom">
+				<RadioButton text="{i18n>radioButtonYes}"/>
+				<RadioButton text="{i18n>radioButtonNo}"/>
+			</RadioButtonGroup>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

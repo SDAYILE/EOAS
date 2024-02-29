@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core">
+	<MessageStrip text="Your installation must comply with the City of Cape Town's standard design " type="Information" showIcon="true"
+		class="sapUiMediumMarginBottom">
+		<link>
+			<Link text="requirements for small scale embedded generation" target="_blank" href="https://resource.capetown.gov.za/documentcentre/Documents/Procedures,%20guidelines%20and%20regulations/Requirements%20for%20Small-Scale%20Embedded%20Generation.pdf"/>
+		</link>
+	</MessageStrip>
+	<MessageStrip text="Access the standard embedded generation schematic drawings " type="Information" showIcon="true"
+		class="sapUiMediumMarginBottom">
+		<link>
+			<Link text="HERE" target="_blank" href="https://resource.capetown.gov.za/documentcentre/Documents/Procedures%2c%20guidelines%20and%20regulations/Embedded_generation_schematic_drawings.pdf"/>
+		</link>
+	</MessageStrip>
+	<f:SimpleForm id="_SchematicForm" visible="false" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+		labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+		columnsL="2" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<Label required="true" id="lblSchema" text="Please upload a schematic"/>
+			<u:FileUploader enabled="{ViewModel>/isEditable}" change="onUploadSchemaDoc" id="fileUploader" name="myFileUpload" uploadUrl="upload/"
+				tooltip="Upload your file to the local server" uploadComplete="handleUploadComplete"/>
+		</f:content>
+	</f:SimpleForm>
+	<Image width="700px" height="800px" visible="false" id="schematicImg"/>
+	<CheckBox id="_SchematicConsent" selected="{ViewModel>/isSubmitted}" enabled="{ViewModel>/isEditable}"
+		text="I acknowledge that the installation is designed in accordance with the schematic displayed/attached above"/>
+</core:FragmentDefinition>

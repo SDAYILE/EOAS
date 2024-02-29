@@ -1,0 +1,93 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:upload="sap.m.upload" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:SimpleForm id="_DocumentForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<!--<FormattedText htmlText="{/HTML}"/>-->
+		</f:content>
+	</f:SimpleForm>
+	<MessageStrip text="{i18n>proxDocMsg}" showIcon="true"
+		showCloseButton="false" class="sapUiMediumMarginBottom"/>
+	<upload:UploadSet id="UploadSet" change="onUploadDocuments" afterItemAdded="ValidateDocuments" instantUpload="true" showIcons="true" uploadEnabled="{ViewModel>/isEditable}"
+		terminationEnabled="true" fileTypes="pdf,txt,doc,png,jpg,jpeg,docx" maxFileNameLength="100" maxFileSize="5"
+		mediaTypes="application/pdf,text/plain,application/msword,image/png,image/jpeg,image/pjpeg,application/vnd.openxmlformats-officedocument.wordprocessingml.document" uploadUrl="../../../../upload" items="{path: '/items', templateShareable: false}"
+		 mode="None" selectionChanged="onSelectionChange">
+		<upload:toolbar>
+			<OverflowToolbar>
+				<Label required="true" text="{i18n>proxOwnerID}"/>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</upload:toolbar>
+		<upload:items>
+			<upload:UploadSetItem enabled="{ViewModel>/isEditable}" enabledEdit="false" visibleEdit="false" fileName="{fileName}"
+				mediaType="{mediaType}" url="{url}" thumbnailUrl="{thumbnailUrl}" uploadState="{uploadState}"></upload:UploadSetItem>
+		</upload:items>
+	</upload:UploadSet>
+	<Table id='uploadTable'>
+		<items>
+			<ColumnListItem visible="false">
+				<cells>
+					<Label required="true" text="{i18n>proxCompReg}"/>
+					<u:FileUploader id="Registration" visible="{ViewModel>/isEditable}" fileType="docx,doc,jpg,pdf,gif,jpeg,bmp" fieldGroupIds="Registration"
+						change="onUploadDocuments" name="myFileUpload" fileSizeExceed="handlefileSizeExceed" placeholder="click browse to upload"
+						maximumFileSize="{ViewModel>/fileSize}" uploadUrl="upload/" uploadComplete="handleUploadComplete"/>
+					<!--<Link text="Link to URL"/>-->
+					<core:Icon src="sap-icon://complete" visible="{ViewModel>/viewMode}" color="green" size="2em"/>
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Label required="true" id="lblIDCopy" text="{i18n>proxIDCopy}"/>
+					<u:FileUploader id="ProxyID" visible="{ViewModel>/isEditable}" fileType="docx,doc,jpg,pdf,gif,jpeg,bmp" name="myFileUpload"
+						fieldGroupIds="ProxyID" change="onUploadDocuments" fileSizeExceed="handlefileSizeExceed" uploadUrl="upload/"
+						placeholder="click browse to upload" maximumFileSize="{ViewModel>/fileSize}" uploadComplete="handleUploadComplete"/>
+					<!--<Link text="Link to URL"/>-->
+					<core:Icon src="sap-icon://complete" visible="{ViewModel>/viewMode}" color="green" size="2em"/>
+				</cells>
+			</ColumnListItem>
+			<!--<ColumnListItem>-->
+			<!--	<cells>-->
+			<!--		<Label required="true" text="{i18n>proxLetter}"/>-->
+			<!--		<u:FileUploader id="Letter" visible="{ViewModel>/isEditable}" fileType="docx,doc,jpg,pdf,gif,jpeg,bmp" name="myFileUpload"-->
+			<!--			change="onUploadDocuments" fieldGroupIds="Letter" fileSizeExceed="handlefileSizeExceed" uploadUrl="upload/"-->
+			<!--			placeholder="click browse to upload" maximumFileSize="{ViewModel>/fileSize}" uploadComplete="handleUploadComplete"/>-->
+					<!--<Link text="Link to URL"/>-->
+			<!--		<core:Icon src="sap-icon://complete" visible="{ViewModel>/viewMode}" color="green" size="2em"/>-->
+			<!--	</cells>-->
+			<!--</ColumnListItem>-->
+		</items>
+		<columns>
+			<Column>
+				<header>
+					<Label text="{i18n>proxlblDoc}"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label width="100%"/>
+				</header>
+			</Column>
+			<Column visible="{ViewModel>/viewMode}">
+				<header>
+					<Label text="{i18n>proxStatus}"/>
+				</header>
+			</Column>
+		</columns>
+	</Table>
+	<!--<f:SimpleForm visible="{ViewModel>/isEditable}" editable="true" layout="ResponsiveGridLayout">-->
+	<!--	<f:content>-->
+			
+			<VBox height="100px" class="sapUiMediumMarginTop" alignItems="Center" justifyContent="Center">
+				<!--<Label text="{i18n>proxConfirm}"/>-->
+				<Text
+				text="{i18n>proxDisclaimer}"/>
+				<RadioButtonGroup select="onEnableSubmit" id="rbgTerms" width="100%" columns="2" selectedIndex="-1">
+					<buttons>
+						<RadioButton text="{i18n>proxYes}"/>
+						<RadioButton text="{i18n>proxNo}"/></buttons>
+				</RadioButtonGroup>
+			</VBox>
+	<!--	</f:content>-->
+	<!--</f:SimpleForm>-->
+</core:FragmentDefinition>

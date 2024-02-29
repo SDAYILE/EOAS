@@ -1,0 +1,32 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog afterClose="onAfterClose" title="{i18n>addInv}" resizable="true" contentWidth="900px" draggable="true">
+		<content padding="false">
+			<f:SimpleForm id="_InverterForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<core:Title text="Add Inverter"/>
+					<Label required="true" text="Manufacturer"/>
+					<ComboBox id="invMake" change="onSelectManufacturer" items="{Manufacturers>/data}">
+						<core:Item key="{Manufacturers>MCode}" text="{Manufacturers>DCode}"/>
+					</ComboBox>
+					<Label required="true" text="Model"/>
+					<ComboBox id="invModel" enabled="false" change="onSelectModel" items="{Models>/data}">
+						<core:Item key="{Models>Model}" text="{Models>Model}"/>
+					</ComboBox>
+					<!--<Input id="inpManufacturer" liveChange="_validateInverterSaveEnablement"/>-->
+					<Label  text="Size in kVA"/>
+					<Input enabled="false" id="invSize" liveChange="_validateInverterSaveEnablement"/>
+					<Label  text="Phase"/>
+					<Input enabled="false" id="invPhase" liveChange="_validateInverterSaveEnablement"/>
+					<Label required="true" text="Quantity"/>
+					<Input id="invQuant" liveChange="_validateInverterSaveEnablement"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="{i18n>btnCancel}" press="onInverterDialogClose" icon="sap-icon://sys-cancel" type="Reject"/>
+			<Button id="btnInvSave" text="{i18n>btnSave}" press="onSaveInverter" enabled="false"  icon="sap-icon://save" type="Accept"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

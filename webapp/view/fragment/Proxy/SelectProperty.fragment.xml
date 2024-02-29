@@ -1,0 +1,43 @@
+<c:FragmentDefinition xmlns="sap.m" xmlns:c="sap.ui.core" xmlns:sap.ui.layout.form="sap.ui.layout.form">
+	<sap.ui.layout.form:SimpleForm editable="true" layout="ResponsiveGridLayout">
+		<sap.ui.layout.form:content>
+			<FormattedText htmlText="{PropertyModel>/HTML}"/>
+		</sap.ui.layout.form:content>
+	</sap.ui.layout.form:SimpleForm>
+	<Table id="oPropertiesTable" items="{Properties>/data}" selectionChange="ValidateProperties"
+		mode="{= ${ViewModel>/isEditable} === true ? 'SingleSelectLeft' : 'None' }">
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{Properties>Erfno}"/>
+					<Text text="{Properties>Address}"/>
+					<Text text="{Properties>AllotmentName}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+		<columns>
+			<Column>
+				<header>
+					<Label text="{i18n>proxErf}"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="{i18n>proxAddr}"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="{i18n>proxCity}"/>
+				</header>
+			</Column>
+		</columns>
+		<headerToolbar>
+			<Toolbar width="150%">
+				<content>
+					<!--<Label text="{i18n>proxPropTitle}" width="100%" required="true"/>-->
+				</content>
+			</Toolbar>
+		</headerToolbar>
+	</Table>
+</c:FragmentDefinition>

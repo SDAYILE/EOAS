@@ -1,0 +1,322 @@
+{
+	"_version": "1.7.0",
+	"sap.app": {
+		"id": "capetown.gov.zaEnergyApplication",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"ZUI5_EOAS_SRV": {
+				"uri": "/sap/opu/odata/sap/ZUI5_EOAS_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"ZUI5_CREDENTIALS_VERIFICATION_SRV": {
+				"uri": "/sap/opu/odata/sap/ZUI5_CREDENTIALS_VERIFICATION_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/ZUI5_CREDENTIALS_VERIFICATION_SRV/metadata.xml"
+				}
+			},
+			"ZUI5_PROXY_AUTH_LCL_SRV": {
+				"uri": "/sap/opu/odata/sap/ZUI5_PROXY_AUTH_LCL_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"ZUI5_EOAS_SSEG_SRV": {
+				"uri": "/sap/opu/odata/sap/ZUI5_EOAS_SSEG_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "capetown.gov.zaEnergyApplication.view.App",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.collaboration": {},
+				"sap.ui.comp": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "capetown.gov.zaEnergyApplication.i18n.i18n"
+				}
+			},
+			"ZUI5_EOAS": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZUI5_EOAS_SRV",
+				"preload": true
+			},
+			"ZUI5_CREDENTIALS_VERIFICATION": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZUI5_CREDENTIALS_VERIFICATION_SRV",
+				"preload": true
+			},
+			"ZUI5_PROXY_AUTH_LCL": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "None"
+				},
+				"dataSource": "ZUI5_PROXY_AUTH_LCL_SRV"
+			},
+			"ZUI5_EOAS_SSEG": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneTime",
+					"defaultCountMode": "None"
+				},
+				"dataSource": "ZUI5_EOAS_SSEG_SRV"
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "capetown.gov.zaEnergyApplication.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": "notFound"
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "LandingPage",
+					"target": "LandingPage"
+				},
+				{
+					"pattern": "ListOfApplications/:ApplicSubmitted:",
+					"name": "ListOfApplications",
+					"target": "ListOfApplications"
+				},
+				{
+					"pattern": "ApplicationDetails/{Notification}",
+					"name": "ApplicationDetails",
+					"target": "ApplicationDetails"
+				},
+				{
+					"pattern": "ServiceConnection/:ApplicSubmitted:",
+					"name": "ServiceConnection",
+					"target": "ServiceConnection"
+				},
+				{
+					"pattern": "Step2ServiceConnection/{Service}/:ApplicSubmitted:",
+					"name": "Step2ServiceConnection",
+					"target": "Step2ServiceConnection"
+				},
+				{
+					"pattern": "CredentialVerificationPage1",
+					"name": "CredentialVerificationPage1",
+					"target": "CredentialVerificationPage1"
+				},
+				{
+					"pattern": "CredentialVerificationPage2/{ServiceType}",
+					"name": "CredentialVerificationPage2",
+					"target": "CredentialVerificationPage2"
+				},
+				{
+					"pattern": "CredentialsDashboard/{ServiceType}/{Bp}",
+					"name": "CredentialsDashboard",
+					"target": "CredentialsDashboard"
+				},
+				{
+					"pattern": "DisplayCredential/{AppReqId}/{ServiceType}",
+					"name": "DisplayCredential",
+					"target": "DisplayCredential"
+				},
+				{
+					"pattern": "AboutUs",
+					"name": "AboutUs",
+					"target": "AboutUs"
+				},
+				{
+					"pattern": "SuccessMessagePage",
+					"name": "SuccessMessagePage",
+					"target": "SuccessMessagePage"
+				},
+				{
+					"pattern": "Authorizations",
+					"name": "Authorizations",
+					"target": "Authorizations"
+				},
+				{
+					"pattern": "NewProxyApplication/{AppID},{BP}",
+					"name": "NewProxyApplication",
+					"target": "NewProxyApplication"
+				},
+				{
+					"pattern": "ApplicationHistory",
+					"name": "ApplicationHistory",
+					"target": "ApplicationHistory"
+				},
+				{
+					"pattern": "SSEGApplication/{AppID},{BP},{Role},{Status}",
+					"name": "SSEGApplication",
+					"target": "SSEGApplication"
+				},
+				{
+					"pattern": "ViewApplication/{AppID},{BP},{Role},{Status}",
+					"name": "ViewApplication",
+					"target": "ViewApplication"
+				}
+			],
+			"targets": {
+				"LandingPage": {
+					"viewName": "LandingPage",
+					"viewId": "LandingPage",
+					"viewLevel": 1
+				},
+				"ListOfApplications": {
+					"viewName": "ListOfApplications",
+					"viewId": "ListOfApplications",
+					"viewLevel": 1
+				},
+				"ApplicationDetails": {
+					"viewName": "ApplicationDetails",
+					"viewId": "ApplicationDetails",
+					"viewLevel": 2
+				},
+				"ServiceConnection": {
+					"viewName": "ServiceConnection",
+					"viewId": "ServiceConnection",
+					"viewLevel": 2
+				},
+				"Step2ServiceConnection": {
+					"viewName": "Step2ServiceConnection",
+					"viewId": "Step2ServiceConnection",
+					"viewLevel": 2
+				},
+				"CredentialVerificationPage1": {
+					"viewName": "CredentialVerificationPage1",
+					"viewId": "CredentialVerificationPage1",
+					"viewLevel": 2
+				},
+				"CredentialVerificationPage2": {
+					"viewName": "CredentialVerificationPage2",
+					"viewId": "CredentialVerificationPage2",
+					"viewLevel": 2
+				},
+				"CredentialsDashboard": {
+					"viewName": "CredentialsDashboard",
+					"viewId": "CredentialsDashboard",
+					"viewLevel": 2
+				},
+				"DisplayCredential": {
+					"viewName": "DisplayCredential",
+					"viewId": "DisplayCredential",
+					"viewLevel": 2
+				},
+				"AboutUs": {
+					"viewName": "AboutUs",
+					"viewId": "AboutUs",
+					"viewLevel": 2
+				},
+				"SuccessMessagePage": {
+					"viewName": "SuccessMessagePage",
+					"viewId": "SuccessMessagePage",
+					"viewLevel": 2
+				},
+				"Authorizations": {
+					"id": "Authorizations",
+					"viewName": "Authorizations"
+				},
+				"NewProxyApplication": {
+					"id": "NewProxyApplication",
+					"viewName": "NewProxyApplication"
+				},
+				"ApplicationHistory": {
+					"id": "ApplicationHistory",
+					"viewName": "ApplicationHistory"
+				},
+				"SSEGApplication": {
+					"id": "SSEGApplication",
+					"viewName": "SSEGApplication"
+				},
+				"ViewApplication": {
+					"id": "ViewApplication",
+					"viewName": "ViewApplication"
+				}
+			}
+		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zui5_eoas/webapp",
+		"_version": "1.1.0"
+	}
+}

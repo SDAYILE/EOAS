@@ -1,0 +1,45 @@
+<c:FragmentDefinition xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:c="sap.ui.core" xmlns:sap.ui.layout.form="sap.ui.layout.form">
+	<FormattedText htmlText="{PropertyModel>/HTML}"/>
+	<Table id="tblProperties" items="{Properties>/data}" class="sapUiMediumMarginBottom" selectionChange="onSelectProperty" mode="{= ${ViewModel>/isEditable} === true ? 'SingleSelectLeft' : 'None' }">
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{Properties>Erfno}"/>
+					<Text text="{Properties>Address}"/>
+					<!--<Text text="{Properties>City}"/>-->
+				</cells>
+			</ColumnListItem>
+		</items>
+		<columns>
+			<Column>
+				<header>
+					<Label text="{i18n>erfSSEG}"/>
+				</header>
+			</Column>
+			<Column>
+				<header>
+					<Label text="{i18n>AddrSSEG}"/>
+				</header>
+			</Column>
+			<!--<Column>-->
+			<!--	<header>-->
+			<!--		<Label text="City"/>-->
+			<!--	</header>-->
+			<!--</Column>-->
+		</columns>
+		<headerToolbar>
+			<Toolbar visible="{ViewModel>/isEditable}" width="100%">
+				<content>
+					<ToolbarSpacer width="100%"/>
+					<!--<SearchField enabled="{ViewModel>/isEditable}" liveChange=".onSearch" placeholder="Search for address"/>-->
+					<Button enabled="{ViewModel>/isEditable}" type="Emphasized" class="blueButton" tooltip="Sort" icon="sap-icon://sort" press="handleSortButtonPressed"/>
+				</content>
+			</Toolbar>
+		</headerToolbar>
+	</Table>
+	<MessageStrip text="{i18n>msgSEEG}" type="Information" showIcon="true" class="sapUiMediumMarginBottom"/>
+			<Toolbar>  <ToolbarSpacer/>
+<Button text="How to Plot" type="Emphasized" class="blueButton" press="onHowto" icon="sap-icon://functional-location"> </Button>
+</Toolbar>
+	<c:HTML content="&lt;iframe id=&quot;mapFrame&quot; style=&quot;width: 100%; height: 400px;&quot; src=&quot;EOASMap.html&quot;&gt;&lt;/iframe&gt;"/>
+</c:FragmentDefinition>

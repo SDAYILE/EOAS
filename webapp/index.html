@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">
+
+		<title>Energy Services Applications</title>
+
+
+<!--  src="resources/sap-ui-core.js"  -->                             
+		<script id="sap-ui-bootstrap"
+	        src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"     
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_fiori_3"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-resourceroots='{"capetown.gov.zaEnergyApplication": ""}'>
+		</script>
+		
+		<link rel="stylesheet" type="text/css" href="https://js.arcgis.com/calcite-components/1.9.2/calcite.css" />
+    	<script type="module" src="https://js.arcgis.com/calcite-components/1.9.2/calcite.esm.js"></script>
+
+    	<link rel="stylesheet"
+    	 href="https://citymaps.capetown.gov.za/arcgis_js_api/library/4.27/esri/themes/light/main.css">
+    	<script src="https://citymaps.capetown.gov.za/arcgis_js_api/library/4.27/init.js"></script>
+
+    	<link rel="stylesheet" href="css/style.css">
+    	<script src="js/installationLocation.js"></script>
+    	<script src="js/app.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<script>
+			sap.ui.getCore().attachInit(function() {
+				new sap.m.Shell({
+					app: new sap.ui.core.ComponentContainer({
+						height : "100%",
+						name : "capetown.gov.zaEnergyApplication"
+					})
+				}).placeAt("content");
+			});
+		</script>
+	</head>
+
+	<body class="sapUiBody" id="content">
+	</body>
+
+</html>

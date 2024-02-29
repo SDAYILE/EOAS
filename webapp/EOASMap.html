@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EOASViewer</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <script src="js/jquery-3.7.1.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/calcite-components/1.9.2/calcite.css" />
+    <script type="module" src="https://js.arcgis.com/calcite-components/1.9.2/calcite.esm.js"></script>
+
+    <link rel="stylesheet"
+        href="https://citymaps.capetown.gov.za/arcgis_js_api/library/4.27/esri/themes/light/main.css">
+    <script src="https://citymaps.capetown.gov.za/arcgis_js_api/library/4.27/init.js"></script>
+
+    <link rel="stylesheet" href="css/gisStyle.css">
+    <script src="js/installationLocation.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+
+    <div id="viewDiv">
+        <div id="btnAerialPhoto" class="esri-widget esri-widget--button" title="Toggle Aerial Imagery">
+            <calcite-icon id="iconAerialImagery" icon="view-hide" text-label="360 degree view"></calcite-icon>
+        </div>
+
+        <div id="panelDiv" class="panel-dock">
+            <calcite-panel>
+                <calcite-tabs id="tabs" layout="inline" position="bottom">
+                    <calcite-tab-nav slot="title-group">
+                        <calcite-tab-title>How To</calcite-tab-title>
+                        <calcite-tab-title selected>Plot Installation Location</calcite-tab-title>
+                    </calcite-tab-nav>
+
+                    <calcite-tab>
+                        <div style="color: red;">
+                                <b>NB: This map works best when embedded or referenced within another web page i.e. this is not a stand-alone map.</b>
+                        </div>
+                    
+                        <b>How to use this map:</b>
+                        <ul>
+                            <li>If a single property is located the map will zoom to and highlight the located property. The drawing tools bar will also become visible. Else if multiple properties are found, select the relevant property from the list drop
+                                down list provided.
+                            </li>
+                            <li>Once you have selected the relevant property use the drawing tools provided to
+                                enable you to plot the exact location of your installation.
+                            </li>
+                            <li>Once you have selected the relevant property and plotted the exact location of your
+                                installation, you may click the "Confirm" button to confirm your installation details.
+                            </li>
+                            <li>
+                                Click the link below to provide feedback regarding the map.
+                            </li>
+                        </ul>
+                        <div style="text-align: right;">
+                            <calcite-link
+                                href="mailto:city.maps@capetown.gov.za?subject=Energy Online Applications Map Feedback">
+                                Map Feedback
+                            </calcite-link>
+                        </div>
+
+                    </calcite-tab>
+
+                    <calcite-tab selected>
+
+                        <calcite-loader id="loaderDiv" style="display: none;"></calcite-loader>
+
+                        <calcite-notice id="noticeDiv">
+                            <div slot="message" id="noticeMessageDiv"></div>
+                        </calcite-notice>
+
+                        <div id="propertyResultsDiv">
+                            <span>Property Results (<span id="lblPropertyResultsCount"></span>)</span>
+                            
+                            <calcite-select id="selectAddress" scale="m" width="full"></calcite-select>
+                        </div>
+
+                        <div id="drawingToolsDiv">
+                            <span>Drawing Tools</span>
+                            <div id="sketchWidgetDiv"></div>
+                        </div>
+
+
+                        <calcite-button id="btnClearMap" appearance="outline" kind="danger"
+                            style="float: left;width: 50%;">
+                            Reset Map
+                        </calcite-button>
+
+                        <calcite-button id="btnConfirmAddressLocation" disabled appearance="solid"
+                            style="float: right;width: 50%;">
+                            2 - Confirm
+                        </calcite-button>
+                    </calcite-tab>
+
+                </calcite-tabs>
+            </calcite-panel>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

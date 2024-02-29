@@ -1,0 +1,52 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic"
+	xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:form="sap.ui.layout.form">
+    
+	<f:SimpleForm id="SCCompanyForm" editable="true" layout="ColumnLayout" title="{i18n>companyVerification}" visible="false">
+		<f:content>
+			<Label text="{i18n>companyRegNumber}" required="true"/>
+			<SearchField id="companyReg" search=".onVerifyInstaller"/>
+			<Label text="{i18n>companyName}"/>
+			<Input id="companyName" enabled="false"/>
+		</f:content>
+	</f:SimpleForm>
+	
+	<MessageStrip id="ElectricConStrip" visible="false" text="{i18n>elelctricalContrText}" showIcon="true" showCloseButton="false"
+		class="sapUiMediumMarginBottom"></MessageStrip>
+		
+	<f:SimpleForm id="SCContractorDetailsForm" editable="true" layout="ColumnLayout" title="{i18n>electricContraFormTitle}">
+		<f:content>
+			<Label text="{i18n>electricContraRegNo}" required="true"/>
+			<SearchField id="contrReg" search=".onVerifyElectrical"/>
+			<Label text="{i18n>companyName}"/>
+			<Input id="contrName" enabled="false" value="{Name}"/>
+			<!--<Label text="Company"/>-->
+			<!--<Input enabled="false"/>-->
+			<!--<Label text="{i18n>credTelephone}"/>-->
+			<!--<Input enabled="false"/>-->
+			<!--<Label text="Fax Number"/>-->
+			<!--<Input enabled="false"/>-->
+			<Label text="{i18n>credTelephone}"/>
+			<Input id="contrCell" enabled="false" value="{CellNumber}"/>
+			<Label text="{i18n>credEmail}"/>
+			<Input id="contrEmail" enabled="false" value="{Email}"/>
+		</f:content>
+	</f:SimpleForm>
+	
+	<!--<f:SimpleForm id="SCECSADetailsForm" editable="true" layout="ColumnLayout" title="ECSA Verification">-->
+	<!--	<f:content>-->
+	<!--		<Label text="ECSA Registration No"/>-->
+	<!--		<SearchField search=".onVerifyECSA"/>-->
+			<!--<Label text="Name"/>-->
+			<!--<Input enabled="false"/>-->
+	<!--		<Label text="Discipline"/>-->
+	<!--		<Input id="ECSAdiscipline" enabled="false" value="{Discipline}"/>-->
+	<!--		<Label text="Category"/>-->
+	<!--		<Input id="ECSAcategory" enabled="false" value="{Category}"/>-->
+	<!--		<Label text="Cell Number"/>-->
+	<!--		<Input id="ECSAcell" enabled="false" value="{CellNumber}"/>-->
+	<!--		<Label text="Email Address"/>-->
+	<!--		<Input id="ECSAemail" enabled="false" value="{Email}"/>-->
+	<!--	</f:content>-->
+	<!--</f:SimpleForm>-->
+	
+</core:FragmentDefinition>

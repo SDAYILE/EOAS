@@ -1,0 +1,50 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Table id="idApplications" inset="false" noDataText="{i18n>noApplicationText}" items="{ApplicationsModel>/results}" mode="SingleSelectLeft" selectionChange="onSelectApplication">
+		<headerToolbar>
+			<OverflowToolbar>
+				<content>
+					<Title text="{i18n>applicationTableTitle}" level="H2"/>
+					<ToolbarSpacer/>
+					<Button tooltip="Sort" icon="sap-icon://sort" press="handleSortButtonPressed" />
+				</content>
+			</OverflowToolbar>
+		</headerToolbar>
+		<infoToolbar>
+			<OverflowToolbar>
+				<Text text="{i18n>applicationTableSubTitle}" />
+			</OverflowToolbar>
+		</infoToolbar>
+		<columns>
+			<Column width="15%">
+				<Text text="{i18n>notification}"/>
+			</Column>
+			<Column width="25%">
+				<Text text="{i18n>property}"/>
+			</Column>
+			<Column width="20%">
+				<Text text="{i18n>typeService}"/>
+			</Column>
+			<Column width="18%">
+				<Text text="{i18n>dateSubmitted}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>status}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<Text text="{ApplicationsModel>Notification}"/>
+					<!--<Link emphasized="true" press="onDisplayApplication" text="{ApplicationsModel>Notification}"/>-->
+					<Text text="{ApplicationsModel>Property}"/>
+					<Text text="{ApplicationsModel>ServiceType}"/>
+					<Text
+						text="{ path: 'ApplicationsModel>Date', type: 'sap.ui.model.type.Date' , formatOptions: { style: { pattern: 'short' }, pattern: 'dd.MM.yyyy' } }"/>
+					<ObjectStatus class="sapUiSmallMarginBottom" text="{ApplicationsModel>StatusText}" 
+					  icon="{= ${ApplicationsModel>Status} === 'E0042' ? 'sap-icon://sys-cancel' : ${ApplicationsModel>Status} === 'E0019' ? 'sap-icon://sys-enter-2' : ${ApplicationsModel>Status} === 'E0028' ? 'sap-icon://complete' : 'sap-icon://process' }" 
+					  state="{= ${ApplicationsModel>Status} === 'E0042' ? 'Error' : ${ApplicationsModel>Status} === 'E0019' ? 'Success' : 'Warning' }"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

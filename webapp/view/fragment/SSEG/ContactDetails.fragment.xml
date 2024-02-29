@@ -1,0 +1,103 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<f:SimpleForm id="_ContactPersonForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="{i18n>selectContSSEG}"/>
+			<Label required="true" text="{i18n>partySSEG}"/>
+			<ComboBox enabled="{ViewModel>/isEditable}" id="cmbAppType" change="onPartySelect">
+				<!--<core:Item key="" text=""/>-->
+				<core:Item key="OWNER" text="{i18n>OwnerSSEG}"/>
+				<core:Item key="APPLC" text="{i18n>ApplicantSSEG}"/>
+				<core:Item key="CONTA" text="{i18n>cntSSEG}"/>
+			</ComboBox>
+			<Label visible="{ViewModel>/onShowFields}" required="{ViewModel>/isPartyReq}" text="{i18n>nameSSEG}"/>
+			<Input visible="{ViewModel>/onShowFields}" id="AppName" enabled="{ViewModel>/isPartyReq}" value="{PartnerModel>/Name}"/>
+			<Label visible="{ViewModel>/onShowFields}" required="{ViewModel>/isPartyReq}" text="{i18n>emailSSEG}"/>
+			<Input visible="{ViewModel>/onShowFields}" id="email" enabled="{ViewModel>/isEditable}" value="{PartnerModel>/Email}"/>
+			<core:Title/>
+			<Label visible="{ViewModel>/onShowFields}" required="{ViewModel>/isPartyReq}" text="{i18n>titleSSEG}"/>
+			<ComboBox visible="{ViewModel>/onShowFields}" id="AppTitle" enabled="{ViewModel>/isPartyReq}" selectedKey="{PartnerModel>/Title}"
+				items="{Titles>/data}">
+				<core:Item key="{Titles>Value}" text="{Titles>Discription}"/>
+			</ComboBox>
+			<Label visible="{ViewModel>/onShowFields}" required="{ViewModel>/isPartyReq}" text="{i18n>surnameSSEG}"/>
+			<Input visible="{ViewModel>/onShowFields}" id="AppSurname" enabled="{ViewModel>/isPartyReq}" value="{PartnerModel>/Surname}"/>
+			<Label visible="{ViewModel>/onShowFields}" required="{ViewModel>/isPartyReq}" text="{i18n>mobileSEEG}"/>
+			<Input id="cell" visible="{ViewModel>/onShowFields}" enabled="{ViewModel>/isEditable}" value="{PartnerModel>/CellNo}"/>
+			<!--<Label required="{ViewModel>/isPartyReq}" text="Home number"/>-->
+			<!--<Input/>-->
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm id="_OwnerForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Property Owner Contact Details"/>
+			<Label text="{i18n>titleSSEG}"/>
+			<ComboBox enabled="false" selectedKey="{OwnerModel>/Title}" items="{Titles>/data}">
+				<core:Item key="{Titles>Value}" text="{Titles>Discription}"/>
+			</ComboBox>
+			<!--<Input value="" enabled="false"/>-->
+			<Label text="{i18n>surnameSSEG}"/>
+			<Input value="{OwnerModel>/Surname}" enabled="false"/>
+			<Label required="true" text="{i18n>emailSSEG}"/>
+			<Input enabled="{ViewModel>/isEditable}" id="ownerEmail" value="{OwnerModel>/Email}"/>
+			<core:Title/>
+			<Label text="First Name"/>
+			<Input value="{OwnerModel>/Name}" enabled="false"/>
+			<Label required="true" text="Mobile Number"/>
+			<Input enabled="{ViewModel>/isEditable}" id="ownerCell" value="{OwnerModel>/CellNo}"/>
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm id="_InstallerForm" visible="false" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+		labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+		columnsL="2" columnsM="1" singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="SSEG Installer Details"/>
+			<Label text="Company Registration number"/>
+			<SearchField id="InstallerReg" search="getInstallerSearch" width="100%" value="{InstallerModel>/InstaReg}" enabled="{ViewModel>/isEditable}"/>
+			<!--<Input />-->
+			<Label text="Company name"/>
+			<Input enabled="false" value="{InstallerModel>/InstaCompn}"/>
+			<!--<Label text="First name"/>-->
+			<!--<Input enabled="false" value="{InstallerModel>/Name}"/>-->
+			<!--<Input value="{InstallerModel>/InstaCompn}" enabled="{ViewModel>/isEditable}"/>-->
+			<core:Title/>
+			<Label text="Email Address"/>
+			<Input enabled="false" value="{InstallerModel>/Email}"/>
+			<!--<Label text="Title"/>-->
+			<!--<Input enabled="false" value="{InstallerModel>/Title}"/>-->
+			<!--<Label text="Surname"/>-->
+			<!--<Input enabled="false" value="{InstallerModel>/Surname}"/>-->
+			<Label text="Telephone number"/>
+			<Input enabled="false" value="{InstallerModel>/Wtelep}"/>
+		</f:content>
+	</f:SimpleForm>
+	<f:SimpleForm id="_ElectricalForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Electrical Contractor Details"/>
+			<Label required="true" text="Dept of Employment and Labour Reg number"/>
+			<SearchField width="100%" placeholder="Number with province prefix i.e. WC" search="getElectricalSearch" id="ElectricalReg"
+				value="{ElectricalModel>/ElecReg}" enabled="{ViewModel>/isEditable}"/>
+			<!--<Input enabled="{ViewModel>/isEditable}" value="{ElectricalModel>/ElecReg}"/>-->
+			<Label text="Name and Surname"/>
+			<Input enabled="false" value="{ElectricalModel>/Name}"/>
+			<Label text="Company name"/>
+			<Input enabled="false" value="{ElectricalModel>/ElecCompn}"/>
+			<core:Title/>
+			<Label text="Email Address"/>
+			<Input enabled="false" value="{ElectricalModel>/Email}"/>
+			<!--<Label text="Title"/>-->
+			<!--<Input enabled="false" value="{ElectricalModel>/Title}"/>-->
+			<!--<Label text="Surname"/>-->
+			<!--<Input enabled="false" value="{ElectricalModel>/Surname}"/>-->
+			<Label text="Telephone number"/>
+			<Input enabled="false" value="{ElectricalModel>/Wtelep}"/>
+			<!--<Label text="Cellphone number"/>-->
+			<!--<Input enabled="false" value="{ElectricalModel>/CellNo}"/>-->
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

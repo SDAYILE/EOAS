@@ -1,0 +1,346 @@
+/* Enter your custom styles here */
+/* Enter your custom styles here */
+/* Enter your custom styles here */
+
+body {
+    background: white;
+}
+
+.inputError .sapMInputBaseContentWrapper {
+    background-color: rgba(255, 0, 0, 0.08)
+}
+
+.logo {
+    margin: 20px 0px 0px 0px;
+}
+
+.para {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #424242;
+    margin-left: 5px;
+}
+
+.para1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: #424242;
+    margin-left: 5px;
+}
+
+.httpLink {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bolder;
+    margin-top: 15px;
+    margin-left: 5px;
+}
+
+.input {
+    margin: 0px 0px 5px 0px;
+    border-radius: 5px;
+    background-color: #f2f4f5;
+    background: #f2f4f5;
+    height: 45px;
+}
+
+.input1 {
+    margin-left: 35px;
+    border-radius: 5px;
+    background-color: #f2f4f5;
+    background: #f2f4f5;
+    height: 45px;
+}
+
+.blueButton .sapMBtnInner {
+    background-color: #1b6680 !important;
+    margin-left: 5px;
+    border: 5px;
+}
+
+.sapMBtnAccept {
+    color: white;
+}
+
+.clearButton {
+    font-size: 12px;
+    font-weight: 600;
+    background-color: white !important;
+    color: #1b6680;
+    margin-right: 5px;
+}
+
+.whiteButton .sapMBtnInner {
+    font-size: 12px;
+    font-weight: 600;
+    background-color: white !important;
+    color: #1b6680 !important;
+    margin: 5px 5px 0px 10px;
+}
+
+.pageTitle {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    justify-content: center;
+    line-height: 40px;
+    color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #1b6680;
+    display: flex;
+}
+
+.boldText {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.msgText {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 10px 0px 0px 10px;
+    font-size: 14px;
+}
+
+.pageTitleText {
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
+    padding-top: 0.95rem;
+    padding-bottom: 0.95rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 520;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: black;
+}
+
+.paraTitle {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: black;
+}
+
+.orangeLine {
+    height: 15px;
+    margin: 0px 0px 15px;
+    background-color: #bdd026;
+    border-color: #bdd026;
+}
+
+.greyLine {
+    height: 2px;
+    margin: 18px 0px 10px;
+    opacity: 0.5;
+    background-color: #bfbfbf;
+}
+
+.sapMSegBBtn.sapMSegBBtnSel .sapMSegBBtnInner {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #1b6680;
+    color: white;
+    border-color: #2ea9d3;
+    border-radius: 1px;
+}
+
+.sapMMessageToast {
+    color: red;
+}
+
+#viewDiv {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.esri-editor {
+    height: 600px;
+}
+
+.esri-editor.esri-item-list__scroller {
+    height: 100%;
+    max-height: 600px;
+}
+
+/*table {*/
+/*    font-family: sans-serif;*/
+/*    border-collapse: collapse;*/
+/*    width: 100%;*/
+/*}*/
+
+/*td,*/
+/*th {*/
+/*    border: 1px solid #dddddd;*/
+/*    text-align: left;*/
+/*    padding: 8px;*/
+/*}*/
+
+/*tr:nth-child(even) {*/
+/*    background-color: #f8f4f4;*/
+/*}*/
+
+/*tr:hover {
+    background-color: #2ea9d3;
+/*}*/
+
+#PointCreator {
+    max-height: 80vh;
+    overflow-y: scroll;
+    width: 22vw;
+    background-color: white;
+}
+
+#PointCreator-home {
+    /* height: auto; */
+    padding: 5%;
+    display: block;
+}
+
+#PointCreator-waiting {
+    padding: 5%;
+    display: block;
+}
+
+#PointCreator-waiting-poly {
+    padding: 5%;
+    display: block;
+}
+
+#PointCreator-form {
+    padding: 5%;
+    display: block;
+}
+
+#PointCreator-success {
+    background-color: #bfffcf;
+    padding: 5% 2%;
+}
+
+#dirTable {
+    overflow-y: auto;
+}
+
+#PointCreator-results_parent {
+    padding: 5%;
+    display: block;
+}
+
+
+/* #PointCreator-loader {
+        }
+
+        #PointCreator-loader-animation {
+
+        } */
+
+#PointCreator-warning {
+    background-color: lightcoral;
+    padding: 5% 2%;
+}
+
+.Warning-light {
+    padding: 2% 2%;
+    margin: 5% 5% 5%;
+}
+
+.PointCreator-heading {
+    /* margin-top: 0%; */
+    text-align: center;
+}
+
+
+/* .PointCreator-heading-warning {
+        } */
+
+.PointCreator-paragraph {
+    margin: 5% 5% 5%;
+    overflow-x: auto;
+    text-align: center;
+    font-size: 110%;
+}
+
+
+/* .PointCreator-paragraph-warning {
+        } */
+
+.PointCreator-label {
+    color: darkgrey;
+    font-size: 110%;
+}
+
+.PointCreator-field {
+    width: 100%;
+    margin-bottom: 3%;
+    font-size: larger;
+}
+
+.PointCreator-button {
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+
+/* .PointCreator-button-main {
+            
+        } */
+
+.PointCreator-button-secondary {
+    color: red;
+}
+
+
+/* .PointCreator-results {
+            padding: 0% 5%;
+        } */
+
+.PointCreator-ul {
+    text-align: left;
+}
+
+.PointCreator-li {
+    margin-bottom: 8%;
+}
+
+.Warning-light {
+    background-color: #fff599;
+}
+
+p span {
+    display: block;
+}
+
+.greyButton .sapMBtnInner {
+    background-color: #8D918D !important;
+    margin-left: 5px;
+    border: 5px;
+}
+
+
+/* Use a media query to add a breakpoint at 800px: */
+
+@media screen and (max-width: 600px) {
+    #PointCreator {
+        width: 45vw;
+    }
+    .esri-search {
+        width: 160px !important;
+    }
+}

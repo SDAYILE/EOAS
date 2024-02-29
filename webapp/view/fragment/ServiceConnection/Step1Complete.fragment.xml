@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form">
+	<f:SimpleForm editable="true">
+		<f:content>
+			<Label text="{i18n>applicantComp}"/>
+			<Text id="ApplicantDet"/>
+			<Label text="{i18n>selectedServComp}"/>
+			<Text id="SelectedServ"/>
+			<Label text="{i18n>erfNumber}"/>
+			<Text id="ErfProp"/>
+			<Label text="{i18n>propertyComp}"/>
+			<Text id="SelectedProp"/>
+		</f:content>
+	</f:SimpleForm>
+</core:FragmentDefinition>

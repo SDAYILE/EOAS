@@ -1,0 +1,579 @@
+<mvc:View xmlns:c="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:upload="sap.m.upload" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="capetown.gov.zaEnergyApplication.controller.ViewApplication">
+	<App>
+		<pages>
+			<Page showNavButton="true" navButtonPress="onNavBack" title="{i18n>SSEGtitle}">
+				<content>
+					<VBox class="sapUiMediumMarginBegin" alignContent="Center" fitContainer="true" justifyContent="Center" width="95%">
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="Selected Property Details"/>
+							</f:content>
+						</f:SimpleForm>
+						<Table id="tblProperties" class="sapUiMediumMarginBottom" items="{Properties>/data}">
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{Properties>Erfno}"/>
+										<Text text="{Properties>Address}"/>
+										<!--<Text text="{Properties>City}"/>-->
+									</cells>
+								</ColumnListItem>
+							</items>
+							<columns>
+								<Column>
+									<header>
+										<Label text="{i18n>erfSSEG}"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="{i18n>AddrSSEG}"/>
+									</header>
+								</Column>
+							</columns>
+							<!--<headerToolbar>-->
+							<!--	<Toolbar width="100%" id="__toolbar1">-->
+							<!--		<content>-->
+							<!--			<Label text="Selected Property" width="100%"/>-->
+							<!--		</content>-->
+							<!--	</Toolbar>-->
+							<!--</headerToolbar>-->
+						</Table>
+						<c:HTML
+							content="&lt;iframe id=&quot;mapFrame&quot; style=&quot;width: 100%; height: 400px;&quot; src=&quot;EOASMap.html&quot;&gt;&lt;/iframe&gt;"/>
+					</VBox>
+					<VBox>
+						<f:SimpleForm id="_ContactPersonForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+							labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="{i18n>selectContSSEG}"/>
+								<Label required="true" text="{i18n>partySSEG}"/>
+								<ComboBox enabled="false" id="cmbAppType" change="onPartySelect">
+									<!--<core:Item key="" text=""/>-->
+									<c:Item key="OWNER" text="{i18n>OwnerSSEG}"/>
+									<c:Item key="APPLC" text="{i18n>ApplicantSSEG}"/>
+									<c:Item key="CONTA" text="{i18n>cntSSEG}"/>
+								</ComboBox>
+								<Label visible="{ViewModel>/onShowFields}" text="{i18n>nameSSEG}"/>
+								<Input visible="{ViewModel>/onShowFields}" id="AppName" enabled="false" value="{PartnerModel>/Name}"/>
+								<Label visible="{ViewModel>/onShowFields}" text="{i18n>emailSSEG}"/>
+								<Input visible="{ViewModel>/onShowFields}" id="email" enabled="false" value="{PartnerModel>/Email}"/>
+								<c:Title/>
+								<Label visible="{ViewModel>/onShowFields}" required="{ViewModel>/isPartyReq}" text="{i18n>titleSSEG}"/>
+								<ComboBox visible="{ViewModel>/onShowFields}" id="AppTitle" enabled="false" selectedKey="{PartnerModel>/Title}" items="{Titles>/data}">
+									<c:Item key="{Titles>Value}" text="{Titles>Discription}"/>
+								</ComboBox>
+								<Label visible="{ViewModel>/onShowFields}" text="{i18n>surnameSSEG}"/>
+								<Input visible="{ViewModel>/onShowFields}" id="AppSurname" enabled="false" value="{PartnerModel>/Surname}"/>
+								<Label visible="{ViewModel>/onShowFields}" text="{i18n>mobileSEEG}"/>
+								<Input id="cell" visible="{ViewModel>/onShowFields}" enabled="false" value="{PartnerModel>/CellNo}"/>
+								<!--<Label required="{ViewModel>/isPartyReq}" text="Home number"/>-->
+								<!--<Input/>-->
+							</f:content>
+						</f:SimpleForm>
+						<f:SimpleForm id="_OwnerForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="Property Owner Contact Details"/>
+								<Label text="{i18n>titleSSEG}"/>
+								<ComboBox enabled="false" selectedKey="{OwnerModel>/Title}" items="{Titles>/data}">
+									<c:Item key="{Titles>Value}" text="{Titles>Discription}"/>
+								</ComboBox>
+								<!--<Input value="" enabled="false"/>-->
+								<Label text="{i18n>surnameSSEG}"/>
+								<Input value="{OwnerModel>/Surname}" enabled="false"/>
+								<Label required="true" text="{i18n>emailSSEG}"/>
+								<Input enabled="false}" id="ownerEmail" value="{OwnerModel>/Email}"/>
+								<c:Title/>
+								<Label text="First Name"/>
+								<Input value="{OwnerModel>/Name}" enabled="false"/>
+								<Label required="true" text="Mobile Number"/>
+								<Input enabled="false" id="ownerCell" value="{OwnerModel>/CellNo}"/>
+							</f:content>
+						</f:SimpleForm>
+						<f:SimpleForm id="_InstallerForm" visible="false" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+							labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="Installer Details"/>
+								<Label text="Company Registration number" required="true"/>
+								<SearchField id="InstallerReg" search="getInstallerSearch" width="100%" value="{InstallerModel>/InstaReg}" enabled="false"/>
+								<!--<Input />-->
+								<Label text="Company name"/>
+								<Input enabled="false" value="{InstallerModel>/InstaCompn}"/>
+								<!--<Label text="First name"/>-->
+								<!--<Input enabled="false" value="{InstallerModel>/Name}"/>-->
+								<!--<Input value="{InstallerModel>/InstaCompn}" enabled="{ViewModel>/isEditable}"/>-->
+								<c:Title/>
+								<Label text="Email Address"/>
+								<Input enabled="false" value="{InstallerModel>/Email}"/>
+								<!--<Label text="Title"/>-->
+								<!--<Input enabled="false" value="{InstallerModel>/Title}"/>-->
+								<!--<Label text="Surname"/>-->
+								<!--<Input enabled="false" value="{InstallerModel>/Surname}"/>-->
+								<Label text="Telephone number"/>
+								<Input enabled="false" value="{InstallerModel>/Wtelep}"/>
+							</f:content>
+						</f:SimpleForm>
+						<f:SimpleForm id="_ElectricalForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+							labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="Electrical Contractor Details"/>
+								<Label required="true" text="Electrical contractor registration number"/>
+								<SearchField width="100%" search="getElectricalSearch" id="ElectricalReg" value="{ElectricalModel>/ElecReg}" enabled="false"/>
+								<!--<Input enabled="{ViewModel>/isEditable}" value="{ElectricalModel>/ElecReg}"/>-->
+								<Label text="Name and Surname"/>
+								<Input enabled="false" value="{ElectricalModel>/Name}"/>
+								<Label text="Company name"/>
+								<Input enabled="false" value="{ElectricalModel>/ElecCompn}"/>
+								<c:Title/>
+								<Label text="Email Address"/>
+								<Input enabled="false" value="{ElectricalModel>/Email}"/>
+								<!--<Label text="Title"/>-->
+								<!--<Input enabled="false" value="{ElectricalModel>/Title}"/>-->
+								<!--<Label text="Surname"/>-->
+								<!--<Input enabled="false" value="{ElectricalModel>/Surname}"/>-->
+								<Label text="Telephone number"/>
+								<Input enabled="false" value="{ElectricalModel>/Wtelep}"/>
+								<!--<Label text="Cellphone number"/>-->
+								<!--<Input enabled="false" value="{ElectricalModel>/CellNo}"/>-->
+							</f:content>
+						</f:SimpleForm>
+					</VBox>
+					<f:SimpleForm id="_SupplyForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+						singleContainerFullSize="false">
+						<f:content>
+							<c:Title text="Existing Supply Details"/>
+							<Label required="true" text="Select the meter related to the application"/>
+							<Input id="cmbMeters" liveChange="_validateExistingSupply" enabled="false" textFormatMode="KeyValue" placeholder="Select Meter number"
+								value="{Header>/MeterNo}" showValueHelp="true" valueHelpRequest=".onValueHelpRequest"/>
+							<Label text="Meter type"/>
+							<Input value="{ViewModel>/DeviceCategoryText}" enabled="false"/>
+							<!--<Input value="{ViewModel>/Phase}" enabled="false"/>-->
+							<c:Title/>
+							<!--<Label text="Category"/>-->
+							<!--<Input value="{ViewModel>/ExistSuppCategory}" enabled="false"/>-->
+							<Label required="true" text="Existing Supply Phase"/>
+							<ComboBox id="phaseCMB" selectedKey="{ViewModel>/Phase}" change="onSelectSupplyPhase" enabled="false" items="{PhaseTypes>/data}">
+								<c:Item key="{PhaseTypes>Value}" text="{PhaseTypes>Discription}"/>
+							</ComboBox>
+							<Label required="true" text="Existing supply size"/>
+							<ComboBox id="cmbSupplySize" enabled="false" selectedKey="{Header>/AMPERE_R}" items="{SupplySize>/data}" change="onAmpSelect">
+								<c:Item key="{SupplySize>Value}" text="{SupplySize>Discription}"/>
+							</ComboBox>
+						</f:content>
+					</f:SimpleForm>
+					<VBox>
+						<f:SimpleForm id="_SystemForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="System Details"/>
+								<Label required="true" text="Application Type"/>
+								<RadioButtonGroup enabled="false" id="idxAppType" select="onSelectAppType" selectedIndex="-1" columns="2">
+									<RadioButton text="New System" class="sapUiSmallMarginEnd"/>
+									<RadioButton text="Modification"/>
+								</RadioButtonGroup>
+							</f:content>
+						</f:SimpleForm>
+						<VBox class="sapUiLargeMarginBegin">
+							<Label text=""/>
+							<Table class="sapUiMediumMarginBegin" id="tblSystem" selectionChange="onSystemTypeSelect" mode="None" width="95%">
+								<items>
+									<ColumnListItem fieldGroupIds="001">
+										<cells>
+											<ObjectIdentifier title="Grid tied (generation source only, no batteries)"
+												text="An installation comprising a load consumption system and a generation system (typically a PV source)."/></cells>
+									</ColumnListItem>
+									<ColumnListItem fieldGroupIds="002">
+										<cells>
+											<ObjectIdentifier title="Grid tied hybrid (generation source with batteries)"
+												text="An installation comprising a load consumption system, a generation system (typically a PV source) and storage units."/></cells>
+									</ColumnListItem>
+									<ColumnListItem fieldGroupIds="003">
+										<cells>
+											<ObjectIdentifier title="Grid tied battery only"
+												text="An installation comprising a load consumption system and an energy storage and generation system (batteries only)."/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem fieldGroupIds="004">
+										<cells>
+											<ObjectIdentifier title="Solar PV Geyser (Source only, no batteries)" text="Electrical water-heating geyser supplied by a PV energy source."/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem fieldGroupIds="005">
+										<cells>
+											<ObjectIdentifier title="Diesel / Petrol Generators (alternative supply)"
+												text="Alternative supplies in terms of SANS 10142-1, Section 7.12 which includes diesel/petrol generators. "/>
+										</cells>
+									</ColumnListItem>
+								</items>
+								<columns>
+									<Column>
+										<header>
+											<Label required="true" text="Type of System"/>
+										</header>
+									</Column>
+								</columns>
+							</Table>
+						</VBox>
+						<f:SimpleForm id="_EnergyForm" editable="true" class="sapUiMediumMarginBottom" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+							labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+							columnsL="2" columnsM="1" singleContainerFullSize="false">
+							<f:content>
+								<Label required="true" text="Energy source"/>
+								<ComboBox id="cmbEnergy" enabled="{ViewModel>/enableEnergy}" selectedKey="{Header>/EnergSourcType}" change="onSelectEnergyType"
+									items="{EnergyTypes>/data}">
+									<c:Item key="{EnergyTypes>Value}" text="{EnergyTypes>Discription}"/>
+								</ComboBox>
+								<!--<Label text="Maximum Charging Current"/>-->
+								<!--<Input id="inpMCC" value="{ path: 'ViewModel>/MCC', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 } }" enabled="false" width="100%"/>-->
+							</f:content>
+						</f:SimpleForm>
+						<f:SimpleForm id="_ExportForm" editable="true" class="sapUiMediumMarginBottom" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+							labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" visible="{ViewModel>/isExporting}" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+							emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1" singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="Export Details"/>
+								<Label required="{ViewModel>/isExporting}" text="Will the system be exporting to grid?"/>
+								<RadioButtonGroup enabled="false" id="idxExport" select="onSelectExport" selectedIndex="-1" columns="2">
+									<RadioButton text="Yes"/>
+									<RadioButton text="No"/>
+								</RadioButtonGroup>
+								<c:Title text=""/>
+								<Label text="Reverse flow blocking?"/>
+								<RadioButtonGroup enabled="false}" visible="{ViewModel>/isNotExport}" id="idxReverse" select="onSelectReverse" selectedIndex="-1"
+									columns="2">
+									<RadioButton text="Yes"/>
+									<RadioButton text="No"/>
+								</RadioButtonGroup>
+								<!--<core:Title/>-->
+								<!--<Label visible="{ViewModel>/isNotExport}" text="MEC (Maximum Export Capacity)"/>-->
+								<!--<Input value="{ path: 'ViewModel>/MEC', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 } }" visible="{ViewModel>/isNotExport}" id="inpMEC" enabled="false"/>-->
+							</f:content>
+						</f:SimpleForm>
+						<f:SimpleForm visible="{ViewModel>/isBatteryReq}" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+							labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+							columnsL="2" columnsM="1" singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="Battery Storage Details"/>
+								<!--<MessageStrip text="Please list all batteries in this installation" type="Information" showIcon="true" class="sapUiMediumMarginBottom"/>-->
+								<!--<Label text="Battery Storage"/>-->
+								<!--<RadioButtonGroup enabled="false" id="idxBatStorage" selectedIndex="-1" columns="2">-->
+								<!--	<RadioButton text="Yes"/>-->
+								<!--	<RadioButton text="No"/>-->
+								<!--</RadioButtonGroup>-->
+							</f:content>
+						</f:SimpleForm>
+						<Table class="sapUiMediumMarginBegin" id="tblBateries" visible="{ViewModel>/isBatteryReq}" items="{BatteryModel>/data}" width="95%">
+							<columns>
+								<Column>
+									<header>
+										<Label text="Make"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Model"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Voltage"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Size of Battery (kWh)"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Quantity"/>
+									</header>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{BatteryModel>Manu}"/>
+										<Text text="{BatteryModel>Model}"/>
+										<Text text="{BatteryModel>Voltage}"/>
+										<Text text="{BatteryModel>SizeD}"/>
+										<Text text="{BatteryModel>Quant}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<f:SimpleForm visible="{ViewModel>/isPV}" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+							labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="PV Panel Details"/>
+								<MessageStrip text="Please list all PV panels in this installation" type="Information" showIcon="true" class="sapUiMediumMarginBottom"/>
+							</f:content>
+						</f:SimpleForm>
+						<Table id="tblPV" items="{PVModel>/data}" visible="{ViewModel>/isPV}" class="sapUiMediumMarginBegin" width="95%">
+							<columns>
+								<Column>
+									<header>
+										<Label text="Manufacturer"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Model"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Watts Per Panel"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Quantity"/>
+									</header>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{PVModel>Manu}"/>
+										<Text text="{PVModel>Model}"/>
+										<Text text="{PVModel>Voltage}"/>
+										<Text text="{PVModel>Quant}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+						<f:SimpleForm id="_ECSAForm" visible="{ViewModel>/isECSA}" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4"
+							labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2"
+							columnsL="2" columnsM="1" singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="ECSA Registered Professional Details"/>
+								<Label required="true" text="Registration number"/>
+								<SearchField id="ECSAReg" search="getECSAPSearch" width="100%" value="{ECSAModel>/EscaReg}" enabled="false"/>
+								<Label text="Registration category"/>
+								<Input enabled="false" value="{ECSAModel>/EscaCat}"/>
+								<Label text="Name and Surname"/>
+								<Input enabled="false" value="{ECSAModel>/Surname}"/>
+								<c:Title/>
+								<Label text="Company Name"/>
+								<Input enabled="false" value="{ECSAModel>/Name}"/>
+								<Label text="Contact number"/>
+								<Input enabled="false" value="{ECSAModel>/Wtelep}"/>
+								<Label text="Email Address"/>
+								<Input enabled="false" value="{ECSAModel>/Email}"/>
+							</f:content>
+						</f:SimpleForm>
+						<f:SimpleForm id="_ConstForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="Construction Details"/>
+								<Label required="true" text="Is the System already installed?"/>
+								<RadioButtonGroup enabled="false" id="idxInstalled" select="onSelectInstalled" selectedIndex="-1" columns="2">
+									<RadioButton text="Yes"/>
+									<RadioButton text="No"/>
+								</RadioButtonGroup>
+								<!--<Label text=""/>-->
+								<MessageStrip visible="{ViewModel>/isInstalled}"
+									text="Please note, the current installation cannot be connected to the grid until commissioning approval has been granted. "
+									type="Information" showIcon="true" class="sapUiMediumMarginBottom"/>
+								<c:Title/>
+								<Label required="{ViewModel>/isNotInstalled}" visible="{ViewModel>/isNotInstalled}" text="Anticipated construction start date"/>
+								<DatePicker visible="{ViewModel>/isNotInstalled}" change="onValidateStartDate"
+									value="{ path: 'Header>/StartDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyy'} }" enabled="false" id="startDate"/>
+								<Label required="{ViewModel>/isNotInstalled}" visible="{ViewModel>/isNotInstalled}" text="Anticipated construction end date"/>
+								<DatePicker visible="{ViewModel>/isNotInstalled}" change="onValidateEndDate"
+									value="{ path: 'Header>/EndDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyy' } }" enabled="false" id="endDate"/>
+							</f:content>
+						</f:SimpleForm>
+					</VBox>
+					<VBox>
+						<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+							adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+							singleContainerFullSize="false">
+							<f:content>
+								<c:Title text="Inverter Details"/>
+							</f:content>
+						</f:SimpleForm>
+						<Table items="{InverterModel>/data}" class="sapUiMediumMarginBegin" width="95%">
+							<columns>
+								<Column>
+									<header>
+										<Label text="Manufacturer"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Model"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Phase" width="100%"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Size in kVA"/>
+									</header>
+								</Column>
+								<Column>
+									<header>
+										<Label text="Quantity" width="100%"/>
+									</header>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem vAlign="Middle">
+									<cells>
+										<Text text="{InverterModel>Manu}"/>
+										<Text text="{InverterModel>Model}"/>
+										<Text text="{InverterModel>Phase}"/>
+										<Text text="{InverterModel>SizeD}"/>
+										<Text text="{InverterModel>Quant}"/>
+										<!--<Button icon="sap-icon://delete" iconDensityAware="false" iconFirst="true" press="handleInverterDelete" text="Delete" type="Transparent"-->
+										<!--	width="auto" enabled="{ViewModel>/isEditable}"/>-->
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</VBox>
+					<f:SimpleForm editable="true" layout="ResponsiveGridLayout" id="docForm">
+						<f:content>
+							<c:Title text="Download Documents"/>
+							<UploadCollection noDataText="No files found." items="{path: 'Documents>/data', templateShareable: false}" id="DisplaySet"
+								mode="SingleSelectLeft" uploadEnabled="false" uploadButtonInvisible="true" sameFilenameAllowed="true" instantUpload="false">
+								<items>
+									<UploadCollectionItem fileName="{Documents>Filename}" visibleEdit="false" visibleDelete="false" enableEdit="false" enableDelete="false"/></items>
+								<toolbar>
+									<OverflowToolbar id="myId">
+										<Title id="attachmentTitle"/>
+										<ToolbarSpacer/>
+										<Button text="Download Document" press="onDownloadSelectedDoc" class="blueButton" width="auto" icon="sap-icon://download" type="Emphasized"/>
+									</OverflowToolbar>
+								</toolbar>
+								<!--<infoToolbar>-->
+								<!--	<Toolbar width="100%">-->
+								<!--		<content>-->
+								<!--			<ToolbarSpacer/>-->
+								<!--			<Button text="Download Document" press="onDownloadSelectedDoc" width="auto" icon="sap-icon://download" type="Transparent"/>-->
+								<!--		</content>-->
+								<!--	</Toolbar>-->
+								<!--</infoToolbar>-->
+							</UploadCollection>
+						</f:content>
+					</f:SimpleForm>
+					<VBox class="sapUiLargeMarginBegin" width="95%">
+						<upload:UploadSet fieldGroupIds="COC" visible="false" id="UploadSetCOC" afterItemRemoved="onUploadDelete"
+							uploadCompleted="onUploadDocuments" instantUpload="true" showIcons="true" uploadEnabled="true" terminationEnabled="true"
+							fileTypes="pdf,txt,doc,png,jpg,jpeg,docx" maxFileNameLength="100" maxFileSize="5"
+							mediaTypes="application/pdf,text/plain,application/msword,image/png,image/jpeg,image/pjpeg,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+							uploadUrl="../../../../upload" mode="None" selectionChanged="onSelectionChange">
+							<upload:toolbar>
+								<OverflowToolbar>
+									<Label text="Upload Certificate of Compliance"/>
+									<ToolbarSpacer/>
+								</OverflowToolbar>
+							</upload:toolbar>
+						</upload:UploadSet>
+						<upload:UploadSet fieldGroupIds="Contract" width="95%" id="UploadSetContract" visible="false" afterItemRemoved="onUploadDelete"
+							uploadCompleted="onUploadDocuments" instantUpload="true" showIcons="true" uploadEnabled="true" terminationEnabled="true"
+							fileTypes="pdf,txt,doc,png,jpg,jpeg,docx" maxFileNameLength="100" maxFileSize="5"
+							mediaTypes="application/pdf,text/plain,application/msword,image/png,image/jpeg,image/pjpeg,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+							uploadUrl="../../../../upload" mode="None" selectionChanged="onUploadDocuments">
+							<upload:toolbar>
+								<OverflowToolbar>
+									<Label text="Upload Supplemental contract"/>
+									<ToolbarSpacer/>
+									<Button text="Download Supplemental Contract Template" press="onDownloadTemplate" />
+								</OverflowToolbar>
+							</upload:toolbar>
+						</upload:UploadSet>
+					</VBox>
+					<f:Form visible="false" id="ComReportForm" editable="true">
+						<f:formContainers>
+							<f:FormContainer title="Commissioning Report">
+								<f:formElements>
+									<f:FormElement>
+										<f:fields>
+											<CheckBox id="Cp1" wrapping="true"
+												text="The SSEG installation complies with the latest editions and relevant sections of NRS 097-2-1 and South African Grid codes. * Available under Reference Documents at http://www.capetown.gov.za/elecserviceforms"/>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<CheckBox id="Cp2"  wrapping="true"
+												text="The loss of mains protection has been proved by loss of mains protection has been proven by a functional test carried out as part of the on-site commissioning (e.g. a momentary disconnection of the grid supply to the SSEG in order to prove that the loss of mains protection operates as expected.)"/>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<CheckBox id="Cp3"  wrapping="true"
+												text="Protection settings have been set to comply with the latest edition of NRS 097-2-1 and the approved generation capacity maximum output of the inverter has been limited by appropriate hardware or software settings."/>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<CheckBox  wrapping="true"
+												text="Safety labels have been fitted in accordance with the latest edition of NRS 097-2-1, SANS 10142-1 and SANS 10142-2 MV Installation Safety Report"
+												id="Cp4"/>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<CheckBox id="Cp5"  wrapping="true"
+												text="The grid-tied SSEG installation complies with the relevant sections of SANS 10142-1 and an installation certificate of compliance were uploaded in the previous step. "/>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<CheckBox  wrapping="true"
+												text="Where applicable for a grid-tied hybrid SSEG installation, the suitable interlocked change-over switch conforms to the requirements of Appendix 4 of the Requirements for SSEG document. "
+												id="Cp6"/>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement>
+										<f:fields>
+											<CheckBox   wrapping="true"
+												text="Where applicable, Reverse power flow blocking protection has been installed and commissioned to prevent reverse power flow into the electricity distribution network "
+												id="Cp7"/>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Comments">
+										<f:fields>
+											<TextArea id="Com" rows="4"/>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+						<f:layout>
+							<f:ResponsiveGridLayout/>
+						</f:layout>
+					</f:Form>
+				</content>
+				<footer>
+					<Toolbar width="100%">
+						<content>
+							<ToolbarSpacer/>
+							<Button id="btnSubmitRep" text="Submit Report" type="Accept"  press="_onSubmitComReport"/>
+							<Button id="btnSubmitDoc" text="Submit Documents" type="Accept"  press="_onSubmitDocuments"/>
+							<Button text="Cancel" width="100px" press="onNavBack" type="Reject"/>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

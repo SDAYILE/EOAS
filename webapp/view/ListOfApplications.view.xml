@@ -1,0 +1,20 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="capetown.gov.zaEnergyApplication.controller.ListOfApplications" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<Page showNavButton="true" navButtonPress="onNavBack" title="">
+			<headerContent>
+				<Button icon="sap-icon://information" text="More Info" press="onMoreInfo"/>
+			</headerContent>
+			<content>
+				<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.ServiceConnection.ApplicationList" type="XML"/>
+			</content>
+			<footer>
+				<OverflowToolbar id="otbFooter">
+					<ToolbarSpacer/>
+					<Button id="btnWithdraw" type="Reject" text="{i18n>withdrawButton}" press="onWithdraApplication" visible="false"/>
+					<Button id="btnSubmit" type="Emphasized" text="{i18n>newApplicationButton}" press="onNewApplication"/>
+				</OverflowToolbar>
+			</footer>
+		</Page>
+	</App>
+</mvc:View>

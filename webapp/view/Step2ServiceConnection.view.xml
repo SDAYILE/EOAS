@@ -1,0 +1,177 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic" xmlns:u="sap.ui.unified"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:form="sap.ui.layout.form"
+	controllerName="capetown.gov.zaEnergyApplication.controller.Step2ServiceConnection" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App id="app">
+		<NavContainer id="SCWizardNavContainer">
+			<pages>
+				<Page id="pgSC" showNavButton="true" navButtonPress="onNavBack" title="Applying for New or Modified Electricity Supply ">
+					<headerContent>
+						<Button icon="sap-icon://information" text="More Info" press="onMoreInfo"/>
+					</headerContent>
+					<content>
+						<Wizard id="SCWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler">
+							<WizardStep id="ServiceStep" title="{i18n>terms}" validated="true">
+								<VBox>
+									<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.ServiceConnection.ServiceSpecific" type="XML"/>
+									<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.ServiceConnection.Verification" type="XML"/>
+								</VBox>
+							</WizardStep>
+							<WizardStep id="DisclaimerStep" title="Disclaimer" activate="validateServiceSpecificFields" validated="true">
+								<Text class="sapUiSmallMarginBottom" text="{i18n>disclaimer}"/>
+							</WizardStep>
+							<WizardStep id="FinishStep" validated="false" complete="onDisplayReviewPage" title="Declaration">
+								<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.ServiceConnection.Declaration" type="XML"/>
+							</WizardStep>
+						</Wizard>
+					</content>
+					<footer>
+						<OverflowToolbar id="otbFooter">
+							<ToolbarSpacer/>
+							<Button id="btnCancel" type="Reject" text="Cancel" press="handleWizardCancel">
+								<layoutData><OverflowToolbarLayoutData moveToOverflow="false"/></layoutData>
+							</Button>
+							<Button id="btnSubmit" type="Emphasized" enabled="false" text="Submit" press="handleWizardSubmit">
+								<layoutData><OverflowToolbarLayoutData moveToOverflow="false"/></layoutData>
+							</Button>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+				<Page id="ReviewPage" showNavButton="true" navButtonPress="onNavBackReview" title="">
+					<content>
+						<form:SimpleForm id="RevPropertyForm" title="Property Details" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="ERF Number"/>
+								<Text text="{Erf}"/>
+								<Label text="Property Address"/>
+								<Text text="{PropertyAddress}"/>
+								<Label text="City"/>
+								<Text text="{City}"/>
+								<Label text="Postal Code"/>
+								<Text text="{PostalCode}"/>
+							</form:content>
+						</form:SimpleForm>
+						<form:SimpleForm id="RevPropertyOwnerForm" title="Property Owner" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Title"/>
+								<Text text="{Title}"/>
+								<Label text="Name"/>
+								<Text text="{FirstName}"/>
+								<Label text="Surname"/>
+								<Text text="{LastName}"/>
+								<Label text="Cell No"/>
+								<Text text="{CellNo}"/>
+								<Label text="Work Tel"/>
+								<Text text="{WorkTel}"/>
+								<Label text="Email"/>
+								<Text text="{Email}"/>
+							</form:content>
+						</form:SimpleForm>
+						<form:SimpleForm id="RevContactPersonForm" title="Contact Person" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Title"/>
+								<Text text="{ContactTitleText}"/>
+								<Label text="Name"/>
+								<Text text="{ContactName}"/>
+								<Label text="Surname"/>
+								<Text text="{ContactSurname}"/>
+								<Label text="Cell No"/>
+								<Text text="{ContactCellNo}"/>
+								<Label text="Email"/>
+								<Text text="{ContactEmail}"/>
+							</form:content>
+						</form:SimpleForm>
+						<form:SimpleForm id="RevPersonPaymentForm" title="Person/Entity Responsible for Payment" minWidth="1024" editable="false"
+							layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Party"/>
+								<Text text="{PartyText}"/>
+								<Label text="Do you require VAT invoice?"/>
+								<Text text="{VatRequired}"/>
+								<Label text="VAT number"/>
+								<Text text="{PayerVatNo}"/>
+								<!--<Label text="VAT certificate"/>-->
+								<!--<Text text="{/productVAT}"/>-->
+								<Label text="Address to appear on the invoice"/>
+								<Text text="{PayerAddressString}"/>
+							</form:content>
+						</form:SimpleForm>
+						<form:SimpleForm id="RevServiceSelectiontForm" title="Service Selected" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Service applied for"/>
+								<Text id="RevService" text="{ServiceText}"/>
+								<Label text="Is this a subdivision of a property"/>
+								<Text text="{SubdivisionText}"/>
+							</form:content>
+						</form:SimpleForm>
+						<form:SimpleForm id="RevExistingSupplyForm" title="Existing Supply" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Meter Number"/>
+								<Text text="{MeterNo}"/>
+								<Label text="Device Category"/>
+								<Text text="{ExistDeviceCategory}"/>
+								<Label text="Existing Supply Phase"/>
+								<Text text="{ExistSuppCategory}"/>
+								<Label text="Existing Required Supply"/>
+								<Text text="{ExistSuppPhase}"/>
+								<Label text="Existing Required Supply Size"/>
+								<Text text="{ExistSuppSupply}"/>
+								<Label text="Existing Voltage"/>
+								<Text text="{ExistSuppVoltage}"/>
+								<Label text="Existing Supply Unit"/>
+								<Text text="{ExistSuppUnit}"/>
+							</form:content>
+						</form:SimpleForm>
+						<form:SimpleForm id="RevServiceRequiredForm" title="Service Required" minWidth="1024" editable="false" layout="ResponsiveGridLayout">
+							<form:content>
+								<Label text="Category"/>
+								<Text id="RevCategory" text="{CategoryText}"/>
+								<Label text="Required Supply Phase"/>
+								<Text id="RevSupplyPhase" text="{PhaseText}"/>
+								<Label text="Required Supply Size"/>
+								<Text id="RevSupplyPhaseSize" text="{SupplySizeText}"/>
+								<Label text=""/>
+								<Link press="NavigateToStep1" text="View More"/>
+								<!--<Label text="Supply Unit"/>-->
+								<!--<Text id="RevSupplyUnit" text="{SupplyUnitText}"/>-->
+								<!--<Label text="Prepayment Meter Quantity Required"/>-->
+								<!--<Text id="RevPrepaymentMeter" text="{PrepaymentText}"/>-->
+								<!--<Label text="Upgrade Supply"/>-->
+								<!--<Text id="RevUpgradeSupply" text="{SelectUpgradeText}"/>-->
+								<!--<Label text="Building Plans"/>-->
+								<!--<Text id="RevBuildingPlan" text="{/discountGroup}"/>-->
+								<!--<Label text="Voltage"/>-->
+								<!--<Text id="RevVoltage" text="{VoltageText}"/>-->
+								<!--<Label text="Meter Type"/>-->
+								<!--<Text id="RevMeterType" text="{MeterTypeText}"/>-->
+								<!--<Label text="Cable Required"/>-->
+								<!--<Text id="RevCable" text="{CableReqText}"/>-->
+								<!--<Label text="Details of Relocation picture"/>-->
+								<!--<Text id="RevRelocation1" text="{/discountGroup}"/>-->
+								<!--<Label text="Details of Relocation picture"/>-->
+								<!--<Text id="RevRelocation2" text="{/productVAT}"/>-->
+								<!--<Label text="Details of Relocation picture"/>-->
+								<!--<Text id="RevRelocation3" text="{/discountGroup}"/>-->
+								<!--<Label text="Details of Relocation picture"/>-->
+								<!--<Text id="RevRelocation4" text="{/productVAT}"/>-->
+								<!--<Label text="Details of Relocation picture"/>-->
+								<!--<Text id="RevRelocation5" text="{/productVAT}"/>-->
+								<!--<Label text="Briefly describe details of Relocation"/>-->
+								<!--<TextArea id="RevRelocation6" rows="8" cols="50" maxLength="300" enabled="false"/>-->
+								<!--<Label text="Tariff Choice"/>-->
+								<!--<Text id="RevTariff" text="{TariffText}"/>-->
+							</form:content>
+						</form:SimpleForm>
+					</content>
+					<footer>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<!--<Button id="btnSubmit" type="Emphasized" text="Submit" press="handleWizardSubmit">-->
+							<!--	<layoutData><OverflowToolbarLayoutData moveToOverflow="false"/></layoutData>-->
+							<!--</Button>-->
+						</OverflowToolbar>
+					</footer>
+				</Page>
+			</pages>
+		</NavContainer>
+	</App>
+</mvc:View>

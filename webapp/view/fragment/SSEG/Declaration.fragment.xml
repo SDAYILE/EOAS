@@ -1,0 +1,100 @@
+<core:FragmentDefinition xmlns:upload="sap.m.upload" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic"
+	xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:form="sap.ui.layout.form">
+	<Text id="txtDeclaration" class="sapUiSmallMarginBottom" text="{i18n>SSEGDeclaration}"/>
+	<CheckBox enabled="{ViewModel>/isEditable}" id="chkConfirm" text="{i18n>confirm}" valueState="Information" select="onEnableSubmit"/>
+	<f:SimpleForm visible="false" labelSpanL="7" labelSpanM="7" labelSpanS="7" editable="true" layout="ResponsiveGridLayout" id="cocForm">
+		<f:content>
+			<core:Title text="Commissioning report"/>
+			<Label required="true"
+				text="The SSEG installation complies with the latest editions and relevant sections of NRS 097-2-1 and South African Grid codes. * Available under Reference Documents at http://www.capetown.gov.za/elecserviceforms"/>
+			<RadioButtonGroup id="Cp1" select="_validateCommisionersReport" width="100%" columns="2" selectedIndex="-1">
+				<buttons>
+					<RadioButton text="Yes"/>
+					<RadioButton text="No"/>
+				</buttons>
+			</RadioButtonGroup>
+			<Label required="true"
+				text="The loss of mains protection has been proved by loss of mains protection has been proven by a functional test carried out as part of the on-site commissioning (e.g. a momentary disconnection of the grid supply to the SSEG in order to prove that the loss of mains protection operates as expected.)"
+				width="100%"/>
+			<RadioButtonGroup id="Cp2" select="_validateCommisionersReport" width="100%" columns="2" selectedIndex="-1">
+				<buttons>
+					<RadioButton text="Yes"/>
+					<RadioButton text="No"/>
+				</buttons>
+			</RadioButtonGroup>
+			<Label required="true"
+				text="Protection settings have been set to comply with the latest edition of NRS 097-2-1 and the approved generation capacity maximum output of the inverter has been limited by appropriate hardware or software settings."
+				width="100%"/>
+			<RadioButtonGroup id="Cp3" select="_validateCommisionersReport" width="100%" columns="2" selectedIndex="-1">
+				<buttons>
+					<RadioButton text="Yes"/>
+					<RadioButton text="No"/>
+				</buttons>
+			</RadioButtonGroup>
+			<Label required="true"
+				text="Safety labels have been fitted in accordance with the latest edition of NRS 097-2-1, SANS 10142-1 and SANS 10142-2 MV Installation Safety Report"
+				width="100%"/>
+			<RadioButtonGroup id="Cp4" select="_validateCommisionersReport" width="100%" columns="2" selectedIndex="-1">
+				<buttons>
+					<RadioButton text="Yes"/>
+					<RadioButton text="No"/>
+				</buttons>
+			</RadioButtonGroup>
+			<Label required="true"
+				text="The grid-tied SSEG installation complies with the relevant sections of SANS 10142-1 and an installation certificate of compliance were uploaded in the previous step. "
+				width="100%"/>
+			<RadioButtonGroup id="Cp5" select="_validateCommisionersReport" width="100%" columns="2" selectedIndex="-1">
+				<buttons>
+					<RadioButton text="Yes"/>
+					<RadioButton text="No"/>
+				</buttons>
+			</RadioButtonGroup>
+			<Label required="true"
+				text="Where applicable for a grid-tied hybrid SSEG installation, the suitable interlocked change-over switch conforms to the requirements of Appendix 4 of the Requirements for SSEG document. "
+				width="100%"/>
+			<RadioButtonGroup id="Cp6" select="_validateCommisionersReport" width="100%" columns="2" selectedIndex="-1">
+				<buttons>
+					<RadioButton text="Yes"/>
+					<RadioButton text="No"/>
+				</buttons>
+			</RadioButtonGroup>
+			<Label required="true"
+				text="Where applicable, Reverse power flow blocking protection has been installed and commissioned to prevent reverse power flow into the electricity distribution network "
+				width="100%"/>
+			<RadioButtonGroup id="Cp7" select="_validateCommisionersReport" width="100%" columns="2" selectedIndex="-1">
+				<buttons>
+					<RadioButton text="Yes"/>
+					<RadioButton text="No"/></buttons>
+			</RadioButtonGroup>
+			<Label text="Comments" width="100%"/>
+			<TextArea id="Com" liveChange="_validateCommisionersReport" rows="4"/></f:content>
+	</f:SimpleForm>
+
+		<upload:UploadSet fieldGroupIds="SchemaDiagram" id="UploadSchemDiagram" visible="false" afterItemRemoved="onUploadDelete"
+		uploadCompleted="onUploadDocuments" instantUpload="true" showIcons="true" uploadEnabled="true" terminationEnabled="true"
+		fileTypes="pdf,txt,doc,png,jpg,jpeg,docx" maxFileNameLength="100" maxFileSize="5"
+		mediaTypes="application/pdf,text/plain,application/msword,image/png,image/jpeg,image/pjpeg,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+		uploadUrl="../../../../upload" mode="None" selectionChanged="onUploadDocuments">
+		<upload:toolbar>
+			<OverflowToolbar>
+				<Label text="Upload a final Schematic Drawing"/>
+				<ToolbarSpacer/>
+			</OverflowToolbar>
+		</upload:toolbar>
+	</upload:UploadSet>
+		<upload:UploadSet id="DisplaySet" visible="false" instantUpload="false" showIcons="true" uploadEnabled="false" terminationEnabled="true"
+		fileTypes="txt,doc,png" maxFileNameLength="30" uploadButtonInvisible="false" maxFileSize="200"
+		mediaTypes="text/plain,application/msword,image/png" uploadUrl="../../../../upload"
+		items="{path: 'Documents>/data', templateShareable: false}" mode="SingleSelectLeft" selectionChanged="onSelectionChange">
+		<upload:toolbar>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button id="downloadSelectedButton" text="Download selected" press="onDownloadSelectedDoc"/>
+			</OverflowToolbar>
+		</upload:toolbar>
+		<upload:items>
+			<upload:UploadSetItem fileName="{Documents>Filename}" mediaType="{Documents>Mimetype}" url="" visibleEdit="false" visibleRemove="false"
+				enabledEdit="false" enabledRemove="false"></upload:UploadSetItem>
+		</upload:items>
+	</upload:UploadSet>
+</core:FragmentDefinition>

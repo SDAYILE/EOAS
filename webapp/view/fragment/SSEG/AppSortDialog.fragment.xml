@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="Property Address" key="Qmtxt" selected="true" />
+			<ViewSettingsItem text="Reference Number" key="Qmnum" />
+			<ViewSettingsItem text="Reference Name" key="NameFirst" />
+			<ViewSettingsItem text="Date Submitted" key="Qmdat" />
+			<ViewSettingsItem text="Role" key="Role" />
+			<ViewSettingsItem text="Status" key="Status" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="Application ID" key="AppReqid" selected="true" />
+			<ViewSettingsItem text="Proxy Name" key="BuMcname2" />
+			<ViewSettingsItem text="Property Address" key="Reqname" />
+			<ViewSettingsItem text="Proxy Validity Period" key="ProxStart" />
+			<ViewSettingsItem text="Status" key="ReqStatus" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

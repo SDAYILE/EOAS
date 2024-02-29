@@ -1,0 +1,58 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic" xmlns:u="sap.ui.unified"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:form="sap.ui.layout.form"
+	controllerName="capetown.gov.zaEnergyApplication.controller.ServiceConnection">
+	<App id="app">
+		<NavContainer id="SCWizardNavContainer">
+			<pages>
+				<Page id="pgSC" showNavButton="true" navButtonPress="onNavBack" title="{i18n>AppPageTitle}">
+					<headerContent>
+						<Button icon="sap-icon://information" text="More Info" press="onMoreInfo"/>
+					</headerContent>
+					<content>
+						<Wizard id="SCWizard" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler">
+							<!--<WizardStep id="TermsStep" title="{i18n>terms}" validated="true">-->
+							<!--	<Text class="sapUiSmallMarginBottom" text="{i18n>SCterms}"/>-->
+							<!--	<Label design="Bold" text="{i18n>additionTerms}"/>-->
+							<!--</WizardStep>-->
+							<WizardStep id="PropertyStep" title="Select Property" validated="false">
+								<Text class="sapUiSmallMarginBottom" text="{i18n>propertyText}"/>
+								<VBox class="sapUiSmallMargin">
+									<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.ServiceConnection.Applicant" type="XML"/>
+								</VBox>
+							</WizardStep>
+							<WizardStep id="SCContactPersStep" validated="true" title="{i18n>wizardContactTitle}" activate="PropertyValidations">
+								<VBox class="sapUiSmallMargin">
+									<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.ServiceConnection.ContactPerson" type="XML"/>
+								</VBox>
+							</WizardStep>
+							<WizardStep id="SCServiceSelection" validated="false" activate="validateContactPersonFields" title="{i18n>wizardServiceSelectTitle}">
+								<VBox>
+									<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.ServiceConnection.ServiceSelection" type="XML"/>
+								</VBox>
+							</WizardStep>
+							<WizardStep id="Step1CompleteStep" activate="onStep1CompleteActivate" validated="false" title="{i18n>wizardCompleteTitle}">
+								<Text class="sapUiSmallMarginBottom" text="{i18n>reviewText}"/>
+								<VBox>
+									<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.ServiceConnection.Step1Complete" type="XML"/>
+								</VBox>
+								<Text/>
+								<Label design="Bold" text="{i18n>continueText}"/>
+							</WizardStep>
+						</Wizard>
+					</content>
+					<footer>
+						<OverflowToolbar id="otbFooter">
+							<ToolbarSpacer/>
+							<Button id="btnCancel" type="Reject" text="Cancel" press="handleWizardCancel">
+								<layoutData><OverflowToolbarLayoutData moveToOverflow="false"/></layoutData>
+							</Button>
+							<Button id="btnContinue" type="Emphasized" visible="false" text="Continue" press="onContinueToStep2">
+								<layoutData><OverflowToolbarLayoutData moveToOverflow="false"/></layoutData>
+							</Button>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+			</pages>
+		</NavContainer>
+	</App>
+</mvc:View>

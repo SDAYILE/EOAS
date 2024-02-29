@@ -1,0 +1,111 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified">
+    
+	<MessageStrip xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns="sap.m"
+		text="{i18n>credentialMandatoryText}" showIcon="true" />
+	
+	<f:SimpleForm id="CVInstaller" editable="true" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title/>
+			<Label text="{i18n>companyRegNumber}"/>
+			<Input id="installerRegNo" value="{RegNumber}" maxLength="10" width="50%"/>
+			<Label text="{i18n>companyName}"/>
+			<Input id="installerName" value="{Name}" maxLength="40" required="true" width="50%"/>
+			<Label text="{i18n>credTelephone}"/>
+			<Input id="installerMobile" value="{CellNumber}" maxLength="30" change="onValidatePhoneNumber" required="true" width="50%"/>
+			<Label text="{i18n>credEmail}"/>
+			<Input id="installerEmail" value="{Email}" maxLength="241" change="onValidateEmail" required="true" width="50%"/>
+			<!--<core:Title/>-->
+			<!--<MessageStrip-->
+			<!--	text="{i18n>dateRangeText}"-->
+			<!--	type="Information" showIcon="true" class="sapUiMediumMarginBottom"></MessageStrip>-->
+				
+			<!--<Label text="{i18n>registrationValidFrom}"/>-->
+			<!--<DatePicker id="installerstartDate" placeholder="Enter Date" value="{ path: 'ValidFrom', type: 'sap.ui.model.type.Date', formatOptions: {'pattern': 'dd.MM.yyyy'} }" change="onValidateStartDate" required="true"/>-->
+			<!--<Label text="{i18n>registrationValidTo}"/>-->
+			<!--<DatePicker placeholder="Enter Date" value="{ path: 'ValidTo', type: 'sap.ui.model.type.Date', formatOptions: {'pattern': 'dd.MM.yyyy'} }" change="onValidateEndDate" required="true"/>-->
+			
+		</f:content>
+	</f:SimpleForm>
+	
+	<f:SimpleForm id="CVElectricContractor" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title/>
+			<!--<Label text="{i18n>companyRegNumber}"/>-->
+			<!--<Input value="{RegNumber}" maxLength="10"/>-->
+			<Label text="{i18n>companyName}"/>
+			<Input id="electrCompName" value="{Name}" maxLength="40" required="true"/>
+			<Label text="{i18n>nameSurname}"/>
+			<Input id="electrNameSurname" value="{NameSurname}" maxLength="40" required="true"/>
+			<Label text="{i18n>deptemploymentRegNumber}"/>
+			<Input id="electrEmpNum"  value="{EmpRegNumber}" maxLength="10" required="true" placeholder="Number with province prefix i.e. WC"/>
+			<Label text="{i18n>credTelephone}"/>
+			<Input id="electrMobileNum" value="{CellNumber}" maxLength="30" change="onValidatePhoneNumber" required="true"/>
+			<Label text="{i18n>credEmail}"/>
+			<Input id="electrEmail" value="{Email}" maxLength="241" change="onValidateEmail" required="true"/>
+			<Label text="{i18n>credCategory}" />
+			<ComboBox id="ElectricalCategory" required="true"
+				items="{ZUI5_CREDENTIALS_VERIFICATION>/CategoryElectricalSet}">
+				<core:Item key="{ZUI5_CREDENTIALS_VERIFICATION>Key}" text="{ZUI5_CREDENTIALS_VERIFICATION>Value}" />
+			</ComboBox>
+			<core:Title/>
+			<MessageStrip
+				text="{i18n>dateRangeText}"
+				type="Information" showIcon="true" class="sapUiMediumMarginBottom"></MessageStrip>
+				
+			<Label text="{i18n>registrationValidFrom}"/>
+			<DatePicker id="electricstartDate" placeholder="Enter Date" value="{ path: 'ValidFrom', type: 'sap.ui.model.type.Date', formatOptions: {'pattern': 'dd.MM.yyyy'} }" change="onValidateStartDate" required="true"/>
+			<Label text="{i18n>registrationValidTo}"/>
+			<DatePicker placeholder="Enter Date" value="{ path: 'ValidTo', type: 'sap.ui.model.type.Date', formatOptions: {'pattern': 'dd.MM.yyyy'} }" change="onValidateEndDate" required="true"/>
+			
+		</f:content>
+	</f:SimpleForm>
+
+ <f:SimpleForm id="CVECSA" editable="true" labelSpanXL="4" labelSpanL="4" labelSpanM="12"
+		labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title/>
+			<Label text="{i18n>ecsaRegNumber}"/>
+			<Input id="ecsaRegNo" value="{RegNumber}" maxLength="10" required="true" width="50%"/>
+			<Label text="{i18n>ecsaNameSurname}"/>
+			<Input id="ecsaName" value="{NameSurname}" maxLength="40" width="50%" required="true"/>
+			<Label text="{i18n>credTelephone}"/>
+			<Input id="ecsaMobile" value="{CellNumber}" maxLength="30" change="onValidatePhoneNumber" required="true" width="50%"/>
+			<Label text="{i18n>credEmail}"/>
+			<Input id="ecsaEmail" value="{Email}" maxLength="241" change="onValidateEmail" required="true" width="50%"/>
+			<!--<core:Title/>-->
+			<Label text="{i18n>credCategory}"/>
+			<ComboBox id="ECSACategory" required="true" width="50%"
+				items="{ZUI5_CREDENTIALS_VERIFICATION>/CategoryECSASet}">
+				<core:Item key="{ZUI5_CREDENTIALS_VERIFICATION>Key}" text="{ZUI5_CREDENTIALS_VERIFICATION>Value}" />
+			</ComboBox>
+			<Label text="{i18n>credDiscipline}"/>
+			<ComboBox id="ECSADiscipline" required="true" width="50%"
+				items="{ZUI5_CREDENTIALS_VERIFICATION>/DisciplineECSASet}">
+				<core:Item key="{ZUI5_CREDENTIALS_VERIFICATION>Key}" text="{ZUI5_CREDENTIALS_VERIFICATION>Value}" />
+			</ComboBox>
+			<Label text="{i18n>notifyQuestion}" required="true"/>
+			<RadioButtonGroup columns="2" selectedIndex="-1" width="100%" select="onSelectNotificationOption"
+				class="sapUiMediumMarginBottom">
+				<RadioButton id="RB1-1" text="{i18n>radioButtonYes}"/>
+				<RadioButton id="RB1-2" text="{i18n>radioButtonNo}"/>
+			</RadioButtonGroup>
+			<!--<core:Title/>-->
+			<!--<MessageStrip-->
+			<!--	text="{i18n>dateRangeText}"-->
+			<!--	type="Information" showIcon="true" class="sapUiMediumMarginBottom"></MessageStrip>-->
+				
+			<!--<Label text="{i18n>registrationValidFrom}"/>-->
+			<!--<DatePicker id="ecsastartDate" placeholder="Enter Date" value="{ path: 'ValidFrom', type: 'sap.ui.model.type.Date', formatOptions: {'pattern': 'dd.MM.yyyy'} }" change="onValidateStartDate" required="true"/>-->
+			<!--<Label text="{i18n>registrationValidTo}"/>-->
+			<!--<DatePicker placeholder="Enter Date" value="{ path: 'ValidTo', type: 'sap.ui.model.type.Date', formatOptions: {'pattern': 'dd.MM.yyyy'} }" change="onValidateEndDate" required="true"/>-->
+			
+		</f:content>
+	</f:SimpleForm>
+
+</core:FragmentDefinition>

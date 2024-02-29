@@ -1,0 +1,24 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog afterClose="onAfterClose" title="{i18n>ssegAddPV}" resizable="true" contentWidth="900px" draggable="true">
+		<content padding="false">
+			<f:SimpleForm id="_PVPanelForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label required="true" text="Manufacturer"/>
+					<Input liveChange="_validatePVSaveEnablement" id="pvManu"/>
+					<Label text="Model"/>
+					<Input id="pvModel" liveChange="_validatePVSaveEnablement"/>
+					<Label required="true" text="Watts Per Panel"/>
+					<Input liveChange="_validatePVSaveEnablement" id="pvWatts"/>
+					<Label required="false" text="Quantity"/>
+					<Input id="pvQuant" liveChange="_validatePVSaveEnablement"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="{i18n>btnCancel}" press="onPVDialogClose" icon="sap-icon://sys-cancel" type="Reject"/>
+			<Button id="btnPVSave" enabled="false" text="{i18n>btnSave}" press="onSavePV" icon="sap-icon://save" type="Accept"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

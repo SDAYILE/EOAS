@@ -1,0 +1,193 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.m.semantic"
+	xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:form="sap.ui.layout.form">
+    
+	<f:SimpleForm id="SCExistingSupplyForm" editable="true" layout="ColumnLayout" title="{i18n>existingSupplyTitle}" visible="false">
+		<f:content>
+		 <!--   <Label text="Category"/>-->
+		 <!--   <ComboBox items="{ZUI5_EOAS>/CategorySet}" selectedKey="{Category}"  change="onSelectExistingCategory">-->
+			<!--      <core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />-->
+			<!--</ComboBox>-->
+			<Label text="{i18n>meterNumber}"/>
+			<Input id="metNo" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleMeterValueHelp" value="{MeterNo}"/>
+			<Label text="{i18n>meterType}"/>
+			<Input id="devCategory" enabled="false"/>
+			<!--<Label text="Category"/>-->
+			<!--<Input id="metCategory" enabled="false"/>-->
+			<Label text="{i18n>existingSupplyPhase}"/>
+			<Input id="metPhase" enabled="false"/>
+			<Label text="{i18n>existingSupplyPhase}"/>
+			<ComboBox
+				items="{ZUI5_EOAS>/SupplyPhaseSet}" selectedKey="{Phase}" change="onSelectExistingRequiredSupply" visible="false" id="existPhase">
+				<core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />
+			</ComboBox>
+			<Label text="{i18n>voltage}" required="true"/>
+			<ComboBox
+				items="{VoltageModel>/results}" change="onSelectExistingVoltage" id="ExistingVoltage" selectedKey="{ExistSuppVoltage}">
+				<core:Item key="{VoltageModel>Key}" text="{VoltageModel>Value}" />
+			</ComboBox>
+			<!--<Label text="Existing Supply Size"/>-->
+			<!--<Input/>-->
+			<Label text="{i18n>existingSupplyPhaseSize}" required="true"/>
+			<ComboBox
+			    id="ExistingLVPhaseSize" visible="false" change="onSelectExistingReqLVSupplySize"
+				items="{ExistingLvSupplySizeModel>/results}" selectedKey="{ExistSuppSupply}">
+				<core:Item key="{ExistingLvSupplySizeModel>Key}" text="{ExistingLvSupplySizeModel>Value}" />
+			</ComboBox>
+			<Label text="{i18n>existingSupplyPhaseSizeKVA}" required="true"/>
+			<Input id="requiredExistingMV" value="{ExistSuppSupply}" visible="false" type="Number"/>
+			<Label text="{i18n>existingSupplyPhaseSizeMVA}" required="true"/>
+			<Input id="requiredExistingHV" value="{ExistSuppSupply}" visible="false" type="Number"/>
+			<Label text="{i18n>existingSupplyUnit}"/>
+			<ComboBox
+				items="{ZUI5_EOAS>/ExistingSupplySet}" id="existSupplUnt" selectedKey="{ExistSuppUnit}" visible="false">
+				<core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />
+			</ComboBox>
+		</f:content>
+	</f:SimpleForm>
+	
+		<MessageStrip id="buildingPlanText" text="{i18n>fileTypeSizeText}" showIcon="true" showCloseButton="false"
+		class="sapUiMediumMarginBottom"></MessageStrip>
+		
+		<MessageStrip id="relocationServiceText" visible="false" text="{i18n>fileTypeSizeRelocationText}" showIcon="true" showCloseButton="false"
+		class="sapUiMediumMarginBottom"></MessageStrip>
+	
+	<f:SimpleForm id="SCServiceRequiredForm" editable="true" layout="ColumnLayout" title="{i18n>serviceRequired}">
+		<f:content>
+		    
+			<Label text="{i18n>category}" required="true"/>
+			<ComboBox id="category" items="{ZUI5_EOAS>/CategorySet}" selectedKey="{Category}"  change="onSelectCategory">
+			      <core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />
+			</ComboBox>
+			
+			<Label text="{i18n>category}" required="true"/>
+			<ComboBox id="categoryTemporary" selectedKey="{Category}"  change="onSelectCategory" visible="false">
+			      <core:Item key="COM" text="Commercial / Industrial" />
+			</ComboBox>
+			
+			<Label text="{i18n>supplyMeterNumber}" required="true"/>
+			<Input id="supplyMeter" value="{MeterNo}" visible="false"/>
+			
+			<Label text="{i18n>supplyUnit}" required="true"/>
+			<ComboBox
+			    id="supplyUnit" visible="false"
+				items="{ZUI5_EOAS>/ExistingSupplySet}" change="onSelectSupplyUnit">
+				<core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />
+			</ComboBox>
+			
+
+			<Label text="{i18n>prepaymentMeterQty1}" required="true"/>
+			<ComboBox id="prepaymentMeter" items="{ZUI5_EOAS>/PrepaidMeterSet}" selectedKey="{NoOfMeters}" visible="false" change="onSelectPrepayment">
+			      <core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />
+			</ComboBox>
+			
+			<Label text="{i18n>prepaymentMeterQty2}" required="true"/>
+			<Input id="prepaymentMeter2" visible="false" liveChange="onAllowNumbersOnly" type="Number" value="{NoOfMeters}"/>
+			
+			<Label text="{i18n>upgradeSupply}" required="true"/>
+			<RadioButtonGroup id="upgradeSupply" columns="2" selectedIndex="-1" visible="false" width="100%" select="onSelectUpgradeSupply"
+				class="sapUiMediumMarginBottom">
+				<RadioButton text="Yes"/>
+				<RadioButton text="No"/>
+			</RadioButtonGroup>
+			
+		    <Label text="{i18n>buildingPlan}" required="true"/>
+			<u:FileUploader id="buildingPlan" visible="false" fileSizeExceed="onFileSizeExceed" maximumFileSize="5" fieldGroupIds="FileUpload" xmlns:u="sap.ui.unified" name="myFileUpload" uploadUrl="upload/"
+				tooltip="Upload your file to the server" uploadComplete="handleUploadComplete" change="onUploadBuildingPlan"
+				typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="txt,jpg,pdf,gif,jpeg,bmp,png" placeholder="Choose a file for Upload..."></u:FileUploader>
+			
+			<Label text="{i18n>voltage}" required="true"/>
+			<ComboBox
+			    id="voltage" visible="false"
+				items="{VoltageModel>/results}" change="onSelectVoltage" selectedKey="{Voltage}">
+				<core:Item key="{VoltageModel>Key}" text="{VoltageModel>Value}" />
+			</ComboBox>
+			
+			<Label id="requiredSupply" text="{i18n>requiredSupplyPhase}" required="true"/>
+			<ComboBox
+			    id="reqSupplyPhase" visible="false"
+				items="{ZUI5_EOAS>/SupplyPhaseSet}" selectedKey="{Phase}" change="onSelectRequiredSupply">
+				<core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />
+			</ComboBox>
+			
+			<Label text="{i18n>requiredSupplyPhase}" required="true"/>
+			<ComboBox
+			    id="reqSupplyPhaseLV"
+				items="{ZUI5_EOAS>/SupplyPhaseSet}" selectedKey="{Phase}" change="onSelectRequiredSupplyLV" visible="false">
+				<core:Item key="{ZUI5_EOAS>Key}" text="{ZUI5_EOAS>Value}" />
+			</ComboBox>
+			
+			<Label text="{i18n>requiredSupplySize}" required="true"/>
+			<ComboBox
+			    id="PhaseSize" visible="false"
+				items="{SupplySizeModel>/results}" selectedKey="{Supply}" change="onSelectRequiredSupplySize">
+				<core:Item key="{SupplySizeModel>Key}" text="{SupplySizeModel>Value}" />
+			</ComboBox>
+			
+			<Label text="{i18n>cableRequired}" required="true"/>
+			<RadioButtonGroup id="cable" columns="2" selectedIndex="-1" visible="false" width="100%" select="onSelectCableRequired"
+				class="sapUiMediumMarginBottom">
+				<RadioButton text="Yes"/>
+				<RadioButton text="No"/>
+			</RadioButtonGroup>
+
+			<Label text="{i18n>requiredLVSupplySize}" required="true"/>
+			<ComboBox
+			    id="LVPhaseSize" visible="false" change="onSelectReqLVSupplySize"
+				items="{CommSupplySizeModel>/results}" selectedKey="{Supply}">
+				<core:Item key="{CommSupplySizeModel>Key}" text="{CommSupplySizeModel>Value}" />
+			</ComboBox>
+			
+			<Label text="{i18n>requiredLVSupplySizeA}" required="true"/>
+			<Input id="requiredLV" value="{Supply}" visible="false" type="Number"/>
+			<Label text="{i18n>requiredLVSupplySizeKVA}" required="true"/>
+			<Input id="requiredMV" value="{Supply}" visible="false" change="onChangeMV" type="Number"/>
+			<Label text="{i18n>requiredLVSupplySizeMVA}" required="true"/>
+			<Input id="requiredHV" value="{Supply}" visible="false" type="Number" change="onChangeHV"/>
+			
+			<Label text="{i18n>meterType}" required="true"/>
+			<ComboBox
+			    id="meterType" visible="false"
+				items="{MeterTypeModel>/results}" selectedKey="{MeterType}" change="onSelectMeterType">
+				<core:Item key="{MeterTypeModel>Key}" text="{MeterTypeModel>Value}" />
+			</ComboBox>
+			
+			
+			<Label text="{i18n>relocationDetails}"/>
+			<u:FileUploader id="serviceTypeInput1" visible="false" fileSizeExceed="onFileSizeExceed" maximumFileSize="5" fieldGroupIds="FileUpload" xmlns:u="sap.ui.unified" name="myFileUpload" uploadUrl="upload/"
+				tooltip="Upload your file to the server" uploadComplete="handleUploadComplete" change="onUploadRelocationDetails1"
+				typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="txt,jpg,pdf,gif,jpeg,bmp,png" placeholder="Choose a file for Upload..."></u:FileUploader>
+				
+			<Label text="{i18n>relocationDetails}"/>
+			<u:FileUploader id="serviceTypeInput2" visible="false" fileSizeExceed="onFileSizeExceed" maximumFileSize="5" fieldGroupIds="FileUpload" xmlns:u="sap.ui.unified" name="myFileUpload" uploadUrl="upload/"
+				tooltip="Upload your file to the server" uploadComplete="handleUploadComplete" change="onUploadRelocationDetails2"
+				typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="txt,jpg,pdf,gif,jpeg,bmp,png" placeholder="Choose a file for Upload..."></u:FileUploader>
+				
+			<Label text="{i18n>relocationDetails}"/>
+			<u:FileUploader id="serviceTypeInput3" visible="false" fileSizeExceed="onFileSizeExceed" maximumFileSize="5" fieldGroupIds="FileUpload" xmlns:u="sap.ui.unified" name="myFileUpload" uploadUrl="upload/"
+				tooltip="Upload your file to the server" uploadComplete="handleUploadComplete" change="onUploadRelocationDetails3"
+				typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="txt,jpg,pdf,gif,jpeg,bmp,png" placeholder="Choose a file for Upload..."></u:FileUploader>
+				
+			<Label text="{i18n>relocationDetails}"/>
+			<u:FileUploader id="serviceTypeInput4" visible="false" fileSizeExceed="onFileSizeExceed" maximumFileSize="5" fieldGroupIds="FileUpload" xmlns:u="sap.ui.unified" name="myFileUpload" uploadUrl="upload/"
+				tooltip="Upload your file to the server" uploadComplete="handleUploadComplete" change="onUploadRelocationDetails4"
+				typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="txt,jpg,pdf,gif,jpeg,bmp,png" placeholder="Choose a file for Upload..."></u:FileUploader>
+				
+			<Label text="{i18n>relocationDetails}"/>
+			<u:FileUploader id="serviceTypeInput5" visible="false" fileSizeExceed="onFileSizeExceed" maximumFileSize="5" fieldGroupIds="FileUpload" xmlns:u="sap.ui.unified" name="myFileUpload" uploadUrl="upload/"
+				tooltip="Upload your file to the server" uploadComplete="handleUploadComplete" change="onUploadRelocationDetails5"
+				typeMissmatch="handleTypeMissmatch" style="Emphasized" fileType="txt,jpg,pdf,gif,jpeg,bmp,png" placeholder="Choose a file for Upload..."></u:FileUploader>
+				
+			<Label text="{i18n>describeRelocation}"/>
+			<TextArea rows="8" cols="50" id="serviceTypeInput6" maxLength="300" value="{RelocationDetail}" visible="false"/>
+
+            <Label text="{i18n>tariffChoice}" required="true"/>
+			<ComboBox
+			    id="tariffChoice" visible="false"
+				items="{TariffChoiceModel>/results}" selectedKey="{TariffChoice}" change="onSelectTariff">
+				<core:Item key="{TariffChoiceModel>Key}" text="{TariffChoiceModel>Value}" />
+			</ComboBox>
+			
+		</f:content>
+	</f:SimpleForm>
+	
+</core:FragmentDefinition>

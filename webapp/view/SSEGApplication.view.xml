@@ -1,0 +1,49 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="capetown.gov.zaEnergyApplication.controller.SSEGApplication"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="{i18n>SSEGtitle}" showNavButton="true" navButtonPress="onNavBack">
+				<content>
+					<Wizard id="SSEGWizard" complete="wizardCompletedHandler" class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
+						<WizardStep id="PropertyStep" nextStep="ContactDetailStep" complete="onValidateGIS" title="Select a Property" validated="true">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.SSEG.SelectProperty" type="XML"/>
+						</WizardStep>
+						<WizardStep id="ContactDetailStep" nextStep="SupplyStep" activate="PropertyValidations" title="Contact Details">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.SSEG.ContactDetails" type="XML"/>
+						</WizardStep>
+						<WizardStep id="SupplyStep" nextStep="SystemStep" activate="validateContactPersonFields" validated="true" title="Existing Supply">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.SSEG.ExistingSupply" type="XML"/>
+						</WizardStep>
+						<WizardStep id="SystemStep" nextStep="InvertersStep" activate="_validateExistingSupply" validated="true" title="System Details">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.SSEG.SystemDetails" type="XML"/>
+						</WizardStep>
+						<WizardStep id="InvertersStep" nextStep="SchematicStep" activate="_validateSystemDetails" validated="true" title="Inverters">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.SSEG.Inverters" type="XML"/>
+						</WizardStep>
+						<WizardStep nextStep="DeclarationStep" id="SchematicStep" activate="_validateInverter" validated="true" title="Schematic">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.SSEG.Schematic" type="XML"/>
+						</WizardStep>
+						<!--<WizardStep id="DocumentStep" nextStep="DeclarationStep" validated="true" title="Documents">-->
+						<!--	<core:Fragment fragmentName="capetown.gov.zaSSEG.fragments.Documents" type="XML"/>-->
+						<!--</WizardStep>-->
+						<WizardStep id="DeclarationStep" complete="onSaveAppProgress" activate="_validateSchema" validated="false" title="Declaration">
+							<core:Fragment fragmentName="capetown.gov.zaEnergyApplication.view.fragment.SSEG.Declaration" type="XML"/>
+						</WizardStep>
+					</Wizard>
+				</content>
+				<footer>
+					<Toolbar width="100%">
+						<content>
+							<Button text="Save" enabled="{ViewModel>/enableSubmit}" visible="false" press="onSubmitApp" width="100px" type="Emphasized"/>
+							<ToolbarSpacer/>
+							<Button text="Cancel" width="100px" type="Reject" press="onNavBack"/>
+							<Button text="Submit" enabled="{ViewModel>/enableSubmit}" id="btnSubmit" press="_onSubmitApp" width="100px" type="Accept"/>
+							<!--<Button text="Submit Report" enabled="false" visible="false" id="btnSubmitRep" press="_onSubmitComReport" width="auto" type="Accept"/>-->
+							<!--<Button text="Submit Documents" visible="false" id="btnSubmitDocs" press="_onSubmitDocuments" width="auto" type="Accept"/>-->
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

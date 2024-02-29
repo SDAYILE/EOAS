@@ -1,0 +1,127 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12"
+		adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+		singleContainerFullSize="false">
+		<f:content>
+			<core:Title text="Please Note:"/>
+			<!--<VBox class="sapUiMediumMargin">-->
+			<FormattedText htmlText="{/HTML}"/>
+		</f:content>
+	</f:SimpleForm>
+	<MessageStrip text="The following file types are supported : docx, doc, jpg, pdf, gif, jpeg, bmp. Maximum file size is 5MB " showIcon="true" showCloseButton="false"
+		class="sapUiMediumMarginBottom"></MessageStrip>
+		
+	<f:SimpleForm editable="true" visible="{ViewModel>/installerVisible}">
+		<f:content>
+			<Table>
+				<items>
+					<!--<ColumnListItem>-->
+					<!--	<cells>-->
+					<!--		<Label required="true" text="Business Registration Supporting Document"/>-->
+					<!--		<u:FileUploader id="InstallerSuppDoc" fileType="jpg,pdf,gif,jpeg,bmp,png" name="BusinessRegDocUpload" maximumFileSize="5"-->
+					<!--			change="onUploadBusinessRegistrationDocuments" placeholder="click browse to upload" uploadUrl="upload/"-->
+					<!--			uploadComplete="handleUploadComplete"/>-->
+					<!--		<core:Icon src="sap-icon://complete" visible="false" color="green" size="2em"/>-->
+					<!--	</cells>-->
+					<!--</ColumnListItem>-->
+					<ColumnListItem>
+						<cells>
+							<Label text="{i18n>companyRegDocument}"/>
+							<u:FileUploader id="InstallerRegDoc" fileType="jpg,pdf,gif,jpeg,bmp,png" change="onUploadCompanyRegDocuments" name="CompanyRegDocUpload"
+								placeholder="click browse to upload" maximumFileSize="5" uploadUrl="upload/" uploadComplete="handleUploadComplete"/>
+							<core:Icon src="sap-icon://complete" visible="false" color="green" size="2em"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column>
+						<header>
+							<Label text="{i18n>document}"/>
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Label text=""/>
+						</header>
+					</Column>
+				</columns>
+			</Table>
+		</f:content>
+	</f:SimpleForm>
+	
+	<f:SimpleForm editable="true" visible="{ViewModel>/electricalVisible}">
+		<f:content>
+			<Table>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Label required="true" text="{i18n>deptemploymentRegDocument}"/>
+							<u:FileUploader id="ElectricalEmpRegDoc" fileType="jpg,pdf,gif,jpeg,bmp,png" name="DepartmentDocUpload" maximumFileSize="5"
+								change="onUploadDepartmentDocuments" placeholder="click browse to upload" uploadUrl="upload/" uploadComplete="handleUploadComplete"/>
+							<core:Icon src="sap-icon://complete" visible="false" color="green" size="2em"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Label required="true" text="{i18n>idDocu}"/>
+							<u:FileUploader id="ElectricalIDDoc" fileType="jpg,pdf,gif,jpeg,bmp,png" change="onUploadIDDocument" name="ElectIDUpload"
+								placeholder="click browse to upload" maximumFileSize="5" uploadUrl="upload/" uploadComplete="handleUploadComplete"/>
+							<core:Icon src="sap-icon://complete" visible="false" color="green" size="2em"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column>
+						<header>
+							<Label text="{i18n>document}"/>
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Label text=""/>
+						</header>
+					</Column>
+				</columns>
+			</Table>
+		</f:content>
+	</f:SimpleForm>
+	
+	<f:SimpleForm editable="true" visible="{ViewModel>/ecsaVisible}">
+		<f:content>
+			<Table>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Label required="true" text="{i18n>ecsaPRCertif}"/>
+							<u:FileUploader id="ECSAPRCert" fileType="jpg,pdf,gif,jpeg,bmp,png" name="ECSACerUpload" maximumFileSize="5" change="onUploadECSACertificate"
+								placeholder="click browse to upload" uploadUrl="upload/" uploadComplete="handleUploadComplete"/>
+							<core:Icon src="sap-icon://complete" visible="false" color="green" size="2em"/>
+						</cells>
+					</ColumnListItem>
+					<ColumnListItem>
+						<cells>
+							<Label required="true" text="{i18n>idDocuECSA}"/>
+							<u:FileUploader id="ECSAIDDoc" fileType="jpg,pdf,gif,jpeg,bmp,png" change="onUploadIDDocument" name="ECSAIDUpload"
+								placeholder="click browse to upload" maximumFileSize="5" uploadUrl="upload/" uploadComplete="handleUploadComplete"/>
+							<core:Icon src="sap-icon://complete" visible="false" color="green" size="2em"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<columns>
+					<Column>
+						<header>
+							<Label text="{i18n>document}"/>
+						</header>
+					</Column>
+					<Column>
+						<header>
+							<Label text=""/>
+						</header>
+					</Column>
+				</columns>
+			</Table>
+		</f:content>
+	</f:SimpleForm>
+	
+</core:FragmentDefinition>

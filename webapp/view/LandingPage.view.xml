@@ -1,0 +1,64 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	controllerName="capetown.gov.zaEnergyApplication.controller.LandingPage" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+						<Page showHeader="false">
+				<content>
+				    <Label text="{i18n>appTitle}" class="pageTitle"/>
+				    <Image  src="./png/coct.png" width="250px" visible="true" densityAware="true" class="sapUiResponsiveMargin"/>
+					<Toolbar xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" width="100%" height="4px" class="orangeLine"/>
+					<HBox id="mainHbox" visible="true" alignItems="Center" justifyContent="Center" title="{i18n>appTitle}">
+						<l:VerticalLayout>
+							<l:HorizontalLayout>
+							   <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" frameType="OneByOne" header="{i18n>aboutUs}"
+									press="onAboutUs" subheader="">
+									<tileContent>
+										<TileContent unit="" footer="Start Here">
+											<ImageContent src="sap-icon://detail-more"/>
+										</TileContent>
+									</tileContent>
+								</GenericTile>
+							    <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" frameType="OneByOne" header="{i18n>proxyAuth}"
+									press="onProxy" subheader="">
+									<tileContent>
+										<TileContent unit="" footer="">
+											<ImageContent src="sap-icon://collaborate"/>
+										</TileContent>
+									</tileContent>
+								</GenericTile>
+								<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" frameType="OneByOne" header="{i18n>credentialVer}"
+									press="onCredentialVerification" subheader="">
+									<tileContent>
+										<TileContent footer="" unit="">
+											<TileContent unit="" footer="">
+												<ImageContent src="sap-icon://accounting-document-verification"/>
+											</TileContent>
+										</TileContent>
+									</tileContent>
+								</GenericTile>
+								<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" frameType="OneByOne" header="{i18n>ssegText}"
+									press="onSSEG" subheader="">
+									<tileContent>
+										<TileContent unit="" footer="">
+											<ImageContent src="sap-icon://photo-voltaic"/>
+										</TileContent>
+									</tileContent>
+								</GenericTile>
+								<!--<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" frameType="OneByOne" header="{i18n>scText}"-->
+								<!--	press="onServiceConnection" subheader="">-->
+								<!--	<tileContent>-->
+								<!--		<TileContent footer="" unit="">-->
+								<!--			<TileContent unit="" footer="">-->
+								<!--				<ImageContent src="sap-icon://lightbulb"/>-->
+								<!--			</TileContent>-->
+								<!--		</TileContent>-->
+								<!--	</tileContent>-->
+								<!--</GenericTile>-->
+							</l:HorizontalLayout>
+						</l:VerticalLayout>
+					</HBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
